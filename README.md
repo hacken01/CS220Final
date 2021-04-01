@@ -1,4 +1,4 @@
-# cp3-twitch-erest
+# cp4-twitch-erest
 
 ## Project setup
 ```
