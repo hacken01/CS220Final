@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
 const mongoose = require('mongoose');
 //get images from multer
 const multer = require('multer');
-const { isInteger } = require('core-js/fn/number');
+
 // we can use localhost or the server
 const upload = multer({
     dest: '../front-end/public/images/',
@@ -18,24 +18,32 @@ const upload = multer({
         fileSize: 10000000
     }
 });
-// create a scheme for items in the museum
-const itemSchema = new mongoose.Schema({
-    id: Number,
-    first_name: String,
-    last_name: String,
+
+/*// List of comments 
+const commentShema = new mongoose.Schema({
     username: String,
-    description: String,
-    topic: String,
+    post: String,
+});*/
+
+// create a scheme for Person in the post
+const postSchema = new mongoose.Schema({
+    name: String,
+    username: String,
+    personComment: String,
     //this is the path of the image
     path: String,
+    /*commentSchema: new mongoose.Schema({
+        username: String,
+        post: String,
+    })*/
 });
-
 // Create a model for the posts.
-const Item = mongoose.model('Item', itemSchema);
+const Post = mongoose.model('Post', postSchema);
+//const Comment = mongoose.model('Comment', commentSchema);
 
 // Upload a photo. Uses the multer middleware for the upload and then returns
 // the path where the photo is stored in the file system.
-app.post('/api/photos', upload.single('photo'), async (req, res) => {
+app.post('/api/photos', upload.single('photo'), async(req, res) => {
     // Just a safety check
     if (!req.file) {
         return res.sendStatus(400);
@@ -46,42 +54,67 @@ app.post('/api/photos', upload.single('photo'), async (req, res) => {
 });
 
 // connect to the database
-mongoose.connect('mongodb://localhost:27017/twitch-erest', {
+mongoose.connect('mongodb://localhost:27017/twitcherest', {
     useNewUrlParser: true
 });
 
-// Create a new item in the museum: takes a title and a path to an image.
-app.post('/api/items', async (req, res) => {
-    const item = new Item({
-
-
-        title: req.body.title,
-        description: req.body.description,
+// Create a new Post for the user
+app.post('/api/posts', async(req, res) => {
+    const post = new Post({
+        name: req.body.name,
+        username: req.body.username,
+        personComment: req.body.personComment,
         path: req.body.path,
+        //commentSchema: req.body.commentSchema,
     });
     try {
-        await item.save();
-        res.send(item);
+        await post.save();
+        res.send(post);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+});
+// Get a list of all of the Posts in the .
+app.get('/api/posts', async(req, res) => {
+    try {
+        let posts = await Post.find();
+        res.send(posts);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+});
+/** 
+
+// Create a new Comment to post
+app.post('/api/posts/:id', async(req, res) => {
+
+    const post = await Post.findOne({
+        _id: req.params.id
+    });
+
+    post.username = req.body.username;
+    post.post = req.body.post;
+
+    post.comments.push(new Comment)({ //FIX ME
+        username: req.body.username,
+        post: req.body.post,
+    });
+    try {
+        await comment.save();
+        res.send(comment);
     } catch (error) {
         console.log(error);
         res.sendStatus(500);
     }
 });
 
-// Get a list of all of the items in the museum.
-app.get('/api/items', async (req, res) => {
+
+//delete the Post from the database
+app.delete('/api/Posts/:id', async(req, res) => {
     try {
-        let items = await Item.find();
-        res.send(items);
-    } catch (error) {
-        console.log(error);
-        res.sendStatus(500);
-    }
-});
-//delete the item from the database
-app.delete('/api/items/:id', async (req, res) => {
-    try {
-        await Item.deleteOne({
+        await Post.deleteOne({
             _id: req.params.id
         });
         res.sendStatus(200);
@@ -91,21 +124,23 @@ app.delete('/api/items/:id', async (req, res) => {
     }
 });
 
-//edit the item
-app.put('/api/items/:id', async (req, res) => {
+//edit the Post
+app.put('/api/Posts/:id', async(req, res) => {
     try {
-        const item = await Item.findOne({
+        const Post = await Post.findOne({
             _id: req.params.id
         });
-        item.title = req.body.title;
-        item.description = req.body.description;
-        await item.save();
+
+        Post.description = req.body.description;
+        Post.topic = req.body.topic;
+
+        await Post.save();
         res.sendStatus(200);
     } catch (error) {
         console.log(error);
         res.sendStatus(500);
     }
 });
+**/
 
-
-app.listen(3000, () => console.log('Server listening on port 3000!'));
+app.listen(4000, () => console.log('Server listening on port 4000!'));
