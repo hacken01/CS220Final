@@ -2,11 +2,11 @@
 
 <div>
   <div class="wrapper">
-    <div class="search">
+    <!--<div class="search">
       <form class="pure-form">
         <i>Search:</i><input placeholder="Topic" v-model="searchText" />
       </form>
-    </div>
+    </div>-->
   </div>
   <div class="browseTitle">
   <h1 class="titleBox">Browse:</h1>
@@ -15,27 +15,53 @@
   <h4 class="titleBox">Examples:<h4>Superhero, Technology, Video Games, Science, Dino, Other</h4></h4>
   </div>
     
-  <UserList :users="users" />
+  <!--<UserList :users="users" />-->
+  <section class="image-gallery">
+    <div class="image" v-for="post in posts" :key="post.id">
+      <h2>{{post.name}}</h2>
+      <h2>{{post.username}}</h2>
+      <img :src="post.path" />
+      <p>{{post.personComment}}</p>
+    </div>
+  </section>
+
+
 </div>
 </template>
 
 <script>
-import UserList from "../components/UserList.vue"
+import axios from 'axios';
+//import UserList from "../components/UserList.vue"
 export default {
   name: 'Home',
-  components: {
+  /*components: {
     UserList
-  },
+  },*/
   data() {
     return {
-      searchText: '',
+      posts: [],
     }
   },
-  computed: {
+   created() {
+    this.getItems();
+  },
+  methods: {
+    async getItems() {
+      try {
+        let response = await axios.get("/api/posts");
+        this.posts = response.data;
+        return true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  }
+
+  /*computed: {
     users() {
       return this.$root.$data.users.filter((user => user.topic.toLowerCase().search(this.searchText.toLowerCase()) >= 0));
     }
-  },
+  },*/
 }
 </script>
 
@@ -94,5 +120,44 @@ input {
   box-shadow: none !important;
   width: 100%;
   height: 40px;
+}
+
+.image h2 {
+  font-style: italic;
+}
+/* Masonry */
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+.image-gallery {
+  column-gap: 1.5em;
+}
+.image {
+  margin: 0 0 1.5em;
+  display: inline-block;
+  width: 100%;
+}
+.image img {
+  width: 100%;
+}
+/* Masonry on large screens */
+@media only screen and (min-width: 1024px) {
+  .image-gallery {
+    column-count: 4;
+  }
+}
+/* Masonry on medium-sized screens */
+@media only screen and (max-width: 1023px) and (min-width: 768px) {
+  .image-gallery {
+    column-count: 3;
+  }
+}
+/* Masonry on small screens */
+@media only screen and (max-width: 767px) and (min-width: 540px) {
+  .image-gallery {
+    column-count: 2;
+  }
 }
 </style>

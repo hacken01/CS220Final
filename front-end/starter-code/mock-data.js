@@ -5,7 +5,8 @@ let mock = [{
         "username": "rtelezhkin0",
         "description": "Spidy-man",
         "Image": "https://images.pexels.com/photos/5691158/pexels-photo-5691158.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-        "topic": "Superhero"
+        "topic": "Superhero",
+        "comments": [],
     },
 
     {
@@ -15,7 +16,8 @@ let mock = [{
         "username": "nortiga1",
         "description": "My Batmobile",
         "Image": "https://images.pexels.com/photos/6633/car-superhero-symbol-batman.jpg?auto=compress&cs=tinysrgb&h=750&w=1260",
-        "topic": "Superhero"
+        "topic": "Superhero",
+        "comments": [],
     },
 
     {
@@ -25,7 +27,8 @@ let mock = [{
         "username": "gsisland2",
         "description": "Any suggestions for a good comic?",
         "Image": "https://images.pexels.com/photos/4142511/pexels-photo-4142511.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-        "topic": "Superhero"
+        "topic": "Superhero",
+        "comments": [],
     },
 
     {
@@ -35,7 +38,8 @@ let mock = [{
         "username": "gcockney3",
         "description": "Groot got style",
         "Image": "https://images.pexels.com/photos/4061662/pexels-photo-4061662.jpeg?cs=srgb&dl=pexels-erik-mclean-4061662.jpg&fm=jpg",
-        "topic": "Superhero"
+        "topic": "Superhero",
+        "comments": [],
     },
     {
         "id": 5,
@@ -44,7 +48,8 @@ let mock = [{
         "username": "tmaple4",
         "description": "Just added this to my collection",
         "Image": "https://images.pexels.com/photos/4061667/pexels-photo-4061667.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Star Wars"
+        "topic": "Star Wars",
+        "comments": [],
     },
     {
         "id": 6,
@@ -53,7 +58,8 @@ let mock = [{
         "username": "eklemt5",
         "description": "Best Smash Character.",
         "Image": "https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 7,
@@ -62,7 +68,8 @@ let mock = [{
         "username": "tfountain6",
         "description": "I miss the good 'ol days",
         "Image": "https://images.pexels.com/photos/3162044/pexels-photo-3162044.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 8,
@@ -71,7 +78,8 @@ let mock = [{
         "username": "jsteers7",
         "description": "Look at my new set up",
         "Image": "https://images.pexels.com/photos/3829227/pexels-photo-3829227.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 9,
@@ -80,7 +88,8 @@ let mock = [{
         "username": "jrape8",
         "description": "Name your top 3 DS games",
         "Image": "https://images.pexels.com/photos/3702458/pexels-photo-3702458.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 10,
@@ -89,7 +98,8 @@ let mock = [{
         "username": "tmaster9",
         "description": "I need a new set. Black or white?",
         "Image": "https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 11,
@@ -98,7 +108,8 @@ let mock = [{
         "username": "nmckinnella",
         "description": "Classic.",
         "Image": "https://images.pexels.com/photos/2563017/pexels-photo-2563017.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Other"
+        "topic": "Other",
+        "comments": [],
     },
     {
         "id": 12,
@@ -107,7 +118,8 @@ let mock = [{
         "username": "fkybbyeb",
         "description": "Check this view",
         "Image": "https://images.pexels.com/photos/2347011/pexels-photo-2347011.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Other"
+        "topic": "Other",
+        "comments": [],
     },
     {
         "id": 13,
@@ -116,7 +128,8 @@ let mock = [{
         "username": "ggebuhrc",
         "description": "Alright, who you got?",
         "Image": "https://images.pexels.com/photos/371924/pexels-photo-371924.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Games"
+        "topic": "Games",
+        "comments": [],
     },
     {
         "id": 14,
@@ -125,7 +138,8 @@ let mock = [{
         "username": "vpartkyad",
         "description": "Anyone want to play?",
         "Image": "https://images.pexels.com/photos/1329644/pexels-photo-1329644.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 15,
@@ -133,7 +147,9 @@ let mock = [{
         "last_name": "Melluish",
         "username": "mmelluishe",
         "description": "I bet you can't name 3 better games",
-        "topic": "https://images.pexels.com/photos/1373100/pexels-photo-1373100.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+        "Image": "https://images.pexels.com/photos/1373100/pexels-photo-1373100.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 16,
@@ -142,7 +158,8 @@ let mock = [{
         "username": "btuftsf",
         "description": "Look how far we've come",
         "Image": "https://images.pexels.com/photos/5059111/pexels-photo-5059111.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 17,
@@ -151,7 +168,8 @@ let mock = [{
         "username": "amiffling",
         "description": "I'm ready to play",
         "Image": "https://images.pexels.com/photos/777001/pexels-photo-777001.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 18,
@@ -160,7 +178,8 @@ let mock = [{
         "username": "hpesekh",
         "description": "I decided I want to change things up.",
         "Image": "https://images.pexels.com/photos/2399840/pexels-photo-2399840.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 19,
@@ -169,7 +188,8 @@ let mock = [{
         "username": "ejentgensi",
         "description": "My friends in their natural element",
         "Image": "https://images.pexels.com/photos/5480700/pexels-photo-5480700.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Dino"
+        "topic": "Dino",
+        "comments": [],
     },
     {
         "id": 20,
@@ -178,7 +198,8 @@ let mock = [{
         "username": "cplumridgej",
         "description": "Art...",
         "Image": "https://images.pexels.com/photos/5745006/pexels-photo-5745006.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Dino"
+        "topic": "Dino",
+        "comments": [],
     },
     {
         "id": 21,
@@ -187,7 +208,8 @@ let mock = [{
         "username": "rlohrensenk",
         "description": "Watch out he is dangerous",
         "Image": "https://images.pexels.com/photos/4806508/pexels-photo-4806508.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Dino"
+        "topic": "Dino",
+        "comments": [],
     },
     {
         "id": 22,
@@ -196,7 +218,8 @@ let mock = [{
         "username": "kmaysorl",
         "description": "Awe inspiring",
         "Image": "https://images.pexels.com/photos/1274260/pexels-photo-1274260.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Other"
+        "topic": "Other",
+        "comments": [],
     },
     {
         "id": 23,
@@ -205,7 +228,8 @@ let mock = [{
         "username": "asalmonm",
         "description": "Nothing cooler than this",
         "Image": "https://images.pexels.com/photos/39561/solar-flare-sun-eruption-energy-39561.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Science"
+        "topic": "Science",
+        "comments": [],
     },
     {
         "id": 24,
@@ -214,7 +238,8 @@ let mock = [{
         "username": "fniaven",
         "description": "Lets send one of these to Mars",
         "Image": "https://images.pexels.com/photos/73910/mars-mars-rover-space-travel-robot-73910.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 25,
@@ -223,7 +248,8 @@ let mock = [{
         "username": "sgilbodyo",
         "description": "I need some new ideas for a game I'm creating",
         "Image": "https://images.pexels.com/photos/356043/pexels-photo-356043.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Other"
+        "topic": "Other",
+        "comments": [],
     },
     {
         "id": 26,
@@ -232,7 +258,8 @@ let mock = [{
         "username": "kenglefieldp",
         "description": "Now this is cool - check this out",
         "Image": "https://images.pexels.com/photos/3913025/pexels-photo-3913025.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 27,
@@ -241,7 +268,8 @@ let mock = [{
         "username": "bpetowq",
         "description": "Who says science isn't interesting",
         "Image": "https://images.pexels.com/photos/414860/pexels-photo-414860.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 28,
@@ -250,7 +278,8 @@ let mock = [{
         "username": "jshailerr",
         "description": "What does this even mean?",
         "Image": "https://images.pexels.com/photos/256262/pexels-photo-256262.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 29,
@@ -259,7 +288,8 @@ let mock = [{
         "username": "oiapicos",
         "description": "I give it 5 years before these become the standard",
         "Image": "https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 30,
@@ -268,7 +298,8 @@ let mock = [{
         "username": "fprescottt",
         "description": "Don't miss this once in a lifetime moment",
         "Image": "https://images.pexels.com/photos/580679/pexels-photo-580679.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Science"
+        "topic": "Science",
+        "comments": [],
     },
     {
         "id": 31,
@@ -277,7 +308,8 @@ let mock = [{
         "username": "ghazelhurstu",
         "description": "Starting my new internship - I am stoked",
         "Image": "https://images.pexels.com/photos/63332/science-world-false-creek-vancouver-british-columbia-63332.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Other"
+        "topic": "Other",
+        "comments": [],
     },
     {
         "id": 32,
@@ -286,7 +318,8 @@ let mock = [{
         "username": "tcouparv",
         "description": "Just finished my latest photo shoot",
         "Image": "https://images.pexels.com/photos/392779/pexels-photo-392779.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Other"
+        "topic": "Other",
+        "comments": [],
     },
     {
         "id": 33,
@@ -295,7 +328,8 @@ let mock = [{
         "username": "cfosdykew",
         "description": "Starting a new project",
         "Image": "https://images.pexels.com/photos/63703/pexels-photo-63703.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 34,
@@ -304,7 +338,8 @@ let mock = [{
         "username": "ggardx",
         "description": "Got some new beats",
         "Image": "https://images.pexels.com/photos/3104/black-and-white-music-headphones-life.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 35,
@@ -313,7 +348,8 @@ let mock = [{
         "username": "ghephery",
         "description": "Any music recommendations - I'm sick of my old stuff",
         "Image": "https://images.pexels.com/photos/1337753/pexels-photo-1337753.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 36,
@@ -322,7 +358,8 @@ let mock = [{
         "username": "mquarlisz",
         "description": "My man- check this guy out!",
         "Image": "https://images.pexels.com/photos/1482476/pexels-photo-1482476.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Other"
+        "topic": "Other",
+        "comments": [],
     },
     {
         "id": 37,
@@ -331,7 +368,8 @@ let mock = [{
         "username": "dgarham10",
         "description": "This is so me!",
         "Image": "https://i.pinimg.com/236x/48/b9/6a/48b96ac5f22d4fb99abc55f9ec5127f9.jpg",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 38,
@@ -340,7 +378,8 @@ let mock = [{
         "username": "hkinkade11",
         "description": "Best Game EVER!!",
         "Image": "https://i.pinimg.com/236x/a1/bf/a8/a1bfa8c9681093a782be790106ee247b.jpg",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 39,
@@ -349,7 +388,8 @@ let mock = [{
         "username": "tshotter12",
         "description": "Anyone else love this game as a kid?",
         "Image": "https://i.pinimg.com/236x/e5/1b/49/e51b491f3a035e3b1df5d7e587c81d7c.jpg",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 40,
@@ -358,7 +398,8 @@ let mock = [{
         "username": "lhuntall13",
         "description": "So I heard that Marvel is releasing something every week until the end of the year.",
         "Image": "https://i.pinimg.com/236x/c9/2e/fc/c92efcc517bb9e1e5fd4991256fd3938.jpg",
-        "topic": "Superhero"
+        "topic": "Superhero",
+        "comments": [],
     },
     {
         "id": 41,
@@ -367,7 +408,8 @@ let mock = [{
         "username": "pwilce14",
         "description": "I just ordered one of these!",
         "Image": "https://i.pinimg.com/236x/3d/5f/bc/3d5fbcb959f97acc647a334153fe1197.jpg",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 42,
@@ -376,7 +418,8 @@ let mock = [{
         "username": "vwinscomb15",
         "description": "This is just cool",
         "Image": "https://i.pinimg.com/236x/0e/c9/95/0ec995c1165129d3a1d1697501ed7b61.jpg",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 43,
@@ -385,7 +428,8 @@ let mock = [{
         "username": "rvoas16",
         "description": "I'm selling some old games - Anyone want this?",
         "Image": "https://i.pinimg.com/236x/e0/d5/cd/e0d5cd0399a767d5bf7ee7f75a6cce60.jpg",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 44,
@@ -394,7 +438,8 @@ let mock = [{
         "username": "rvoas16",
         "description": "I'm selling some old games - Anyone want this?",
         "Image": "https://i.pinimg.com/236x/fa/d0/f2/fad0f29fdd37a2c48c872fe0906b0095.jpg",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 45,
@@ -403,7 +448,8 @@ let mock = [{
         "username": "cbraam18",
         "description": "I'm ready for the new Black Widow movie!",
         "Image": "https://i.pinimg.com/236x/4a/fc/69/4afc69f0d0f87456a30c893f1517a392.jpg",
-        "topic": "Superhero"
+        "topic": "Superhero",
+        "comments": [],
     },
     {
         "id": 46,
@@ -412,7 +458,8 @@ let mock = [{
         "username": "csenior19",
         "description": "Life is just good",
         "Image": "https://i.pinimg.com/236x/73/bc/c8/73bcc8a3695a4c45f374a02e718d30bb.jpg",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 47,
@@ -421,7 +468,8 @@ let mock = [{
         "username": "mchaudhry1a",
         "description": "Nothing better than this",
         "Image": "https://i.pinimg.com/236x/84/2f/0b/842f0be4472c1a64fd37b7b4886dbbd3.jpg",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 48,
@@ -430,7 +478,8 @@ let mock = [{
         "username": "rmacquaker1b",
         "description": "You know...",
         "Image": "https://i.pinimg.com/236x/bc/4b/e8/bc4be8741fc79f28bea408ccee5f91b2.jpg",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 49,
@@ -439,7 +488,8 @@ let mock = [{
         "username": "kormiston1c",
         "description": "The Real Hero",
         "Image": "https://i.pinimg.com/236x/35/1c/7e/351c7ed94f799c71290cef4102e2c882.jpg",
-        "topic": "Superhero"
+        "topic": "Superhero",
+        "comments": [],
     },
     {
         "id": 50,
@@ -448,7 +498,8 @@ let mock = [{
         "username": "grubie1d",
         "description": "I want it",
         "Image": "https://i.pinimg.com/236x/a9/9a/b5/a99ab58000f00fda2a124d849fca9572.jpg",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 51,
@@ -457,7 +508,8 @@ let mock = [{
         "username": "eewestace1e",
         "description": "A is for Apple",
         "Image": "https://i.pinimg.com/236x/9f/8f/c9/9f8fc90f961f0181500a35e88678f1e9.jpg",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 52,
@@ -466,7 +518,8 @@ let mock = [{
         "username": "thaughey1f",
         "description": "Imagine what you can do with this",
         "Image": "https://i.pinimg.com/236x/ca/62/91/ca62915ab5d97fe8627b9654530bf7b8.jpg",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 53,
@@ -475,7 +528,8 @@ let mock = [{
         "username": "dbroadwell1g",
         "description": "Tell me I'm not the only one",
         "Image": "https://i.pinimg.com/236x/df/ec/a5/dfeca5be3d3f0a77882ba3ccd3ad8f5e.jpg",
-        "topic": "Superhero"
+        "topic": "Superhero",
+        "comments": [],
     },
     {
         "id": 54,
@@ -484,7 +538,8 @@ let mock = [{
         "username": "afollis1h",
         "description": "Yup",
         "Image": "https://i.pinimg.com/236x/e9/f0/1b/e9f01b4efca8cf32dff5ad19769da67d.jpg",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 55,
@@ -493,7 +548,8 @@ let mock = [{
         "username": "wlavington1i",
         "description": "It's not just video games - this is life for me",
         "Image": "https://i.pinimg.com/236x/22/f8/3e/22f83e19b27dcf211db5ef189a65483c.jpg",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 56,
@@ -502,7 +558,8 @@ let mock = [{
         "username": "durch1j",
         "description": "Gotta Love it",
         "Image": "https://i.pinimg.com/236x/08/d0/fd/08d0fd6470a7a8e554d016a2c03190b1.jpg",
-        "topic": "Star Wars"
+        "topic": "Star Wars",
+        "comments": [],
     },
     {
         "id": 57,
@@ -511,7 +568,8 @@ let mock = [{
         "username": "blembrick1k",
         "description": "I want a new keyboard",
         "Image": "https://i.pinimg.com/236x/a6/f4/c7/a6f4c756d62b19c4f61f37387cbe2b96.jpg",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 58,
@@ -520,7 +578,8 @@ let mock = [{
         "username": "jheddon1l",
         "description": "I need this phone case",
         "Image": "https://i.pinimg.com/236x/a7/86/41/a7864142b7bc7ded2559982cdb3a0b02.jpg",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 59,
@@ -529,7 +588,8 @@ let mock = [{
         "username": "cfosdykew",
         "description": "Scream Power",
         "Image": "https://i.pinimg.com/236x/69/c7/8c/69c78c650d5e00253fe35cecff4392a9.jpg",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 60,
@@ -538,7 +598,8 @@ let mock = [{
         "username": "ggardx",
         "description": "@Carlty45 you need this.",
         "Image": "https://i.pinimg.com/236x/30/e5/9d/30e59d7a28c4edd86a032190936c1ad6.jpg",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 61,
@@ -547,7 +608,8 @@ let mock = [{
         "username": "ghephery",
         "description": "Any music recommendations - I'm sick of my old stuff",
         "Image": "https://images.pexels.com/photos/1337753/pexels-photo-1337753.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 62,
@@ -556,7 +618,8 @@ let mock = [{
         "username": "mquarlisz",
         "description": "Flash is the best",
         "Image": "https://i.pinimg.com/236x/2f/a9/39/2fa93950bc75ca2832843046bb96b480.jpg",
-        "topic": "Superhero"
+        "topic": "Superhero",
+        "comments": [],
     },
     {
         "id": 63,
@@ -565,7 +628,8 @@ let mock = [{
         "username": "dgarham10",
         "description": "HAHA too funny",
         "Image": "https://i.pinimg.com/236x/5b/bf/82/5bbf8201c523c50d7a4e8855dc1b87ec.jpg",
-        "topic": "Other"
+        "topic": "Other",
+        "comments": [],
     },
     {
         "id": 64,
@@ -574,7 +638,8 @@ let mock = [{
         "username": "hkinkade11",
         "description": "She can't be trusted :D",
         "Image": "https://i.pinimg.com/236x/e5/1e/ea/e51eeaadc151336ca901cd88b0c15715.jpg",
-        "topic": "Star Wars"
+        "topic": "Star Wars",
+        "comments": [],
     },
     {
         "id": 65,
@@ -583,7 +648,8 @@ let mock = [{
         "username": "tshotter12",
         "description": "I wouldn't be surprised",
         "Image": "https://i.pinimg.com/236x/fa/23/99/fa239975d6176a53b2ffdb948711c1dc.jpg",
-        "topic": "Superhero"
+        "topic": "Superhero",
+        "comments": [],
     },
     {
         "id": 66,
@@ -592,7 +658,8 @@ let mock = [{
         "username": "lhuntall13",
         "description": "Which is your favorite?",
         "Image": "https://i.pinimg.com/236x/e4/aa/b0/e4aab068155c785c63d6c1c13554ea35.jpg",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 67,
@@ -601,7 +668,8 @@ let mock = [{
         "username": "pwilce14",
         "description": "I want this at my wedding",
         "Image": "https://i.pinimg.com/236x/c3/16/3f/c3163f63dfc4974b4a91344d9ac82a66.jpg",
-        "topic": "Other"
+        "topic": "Other",
+        "comments": [],
     },
     {
         "id": 68,
@@ -610,7 +678,8 @@ let mock = [{
         "username": "vwinscomb15",
         "description": "And now you'll know",
         "Image": "https://i.pinimg.com/564x/a8/f3/36/a8f33625b1b9a626c37efc18b317177a.jpg",
-        "topic": "Other"
+        "topic": "Other",
+        "comments": [],
     },
     {
         "id": 69,
@@ -619,7 +688,8 @@ let mock = [{
         "username": "rvoas16",
         "description": "Who is the best to play with?",
         "Image": "https://i.pinimg.com/236x/a0/2e/e1/a02ee151946d19d727f54dc662d10794.jpg",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 70,
@@ -628,7 +698,8 @@ let mock = [{
         "username": "rvoas16",
         "description": "Also which Age of Empires game is the best, I don't know which to buy.",
         "Image": "https://i.pinimg.com/236x/af/25/6a/af256a9a8057fa28760c417b29a11898.jpg",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 71,
@@ -637,7 +708,8 @@ let mock = [{
         "username": "cbraam18",
         "description": "Accurate",
         "Image": "https://i.pinimg.com/236x/a2/e3/e1/a2e3e17570b5e6e410c4340922c0b95a.jpg",
-        "topic": "Star Wars"
+        "topic": "Star Wars",
+        "comments": [],
     },
     {
         "id": 72,
@@ -646,7 +718,8 @@ let mock = [{
         "username": "csenior19",
         "description": "Life is just good",
         "Image": "https://i.pinimg.com/236x/73/bc/c8/73bcc8a3695a4c45f374a02e718d30bb.jpg",
-        "topic": "Technology"
+        "topic": "Technology",
+        "comments": [],
     },
     {
         "id": 73,
@@ -655,7 +728,8 @@ let mock = [{
         "username": "mchaudhry1a",
         "description": "I'm selling these. Let me know if you're interested",
         "Image": "https://i.pinimg.com/236x/48/2f/8b/482f8b9e8aebe5be6a1c8246018586fa.jpg",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     },
     {
         "id": 74,
@@ -664,7 +738,8 @@ let mock = [{
         "username": "eklemt5",
         "description": "So much respect",
         "Image": "https://i.pinimg.com/236x/4d/3d/6b/4d3d6bc8bbcd06b8d8df7c6b1108f0a2.jpg",
-        "topic": "Star wars"
+        "topic": "Star wars",
+        "comments": [],
     },
     {
         "id": 75,
@@ -673,7 +748,8 @@ let mock = [{
         "username": "tfountain6",
         "description": "I miss the good 'ol days",
         "Image": "https://i.pinimg.com/236x/5f/00/19/5f00192ebec985d8f24f168d2bbfd951.jpg",
-        "topic": "Video Games"
+        "topic": "Video Games",
+        "comments": [],
     }
 ]
 
