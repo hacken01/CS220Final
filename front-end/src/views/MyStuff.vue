@@ -20,10 +20,10 @@
             <textarea v-model="personComment" cols=50 rows=4 placeholder="Comment" ></textarea>
             <button @click="upload">Upload</button>
           </div>
-          <div class="upload" v-if="addItem">
-            <h2>{{addItem.title}}</h2>
-            <img :src="addItem.path" />
-            <p>{{addItem.text}}</p>
+          <div class="upload" v-if="addPost">
+            <h2>{{addPost.title}}</h2>
+            <img :src="addPost.path" />
+            <p>{{addPost.text}}</p>
           </div>
         </div>
         <!--
@@ -39,16 +39,16 @@
               </div>
             </div>
           </div>
-          <div class="upload" v-if="findItem">
-            <input v-model="findItem.title">
+          <div class="upload" v-if="findPost">
+            <input v-model="findPost.title">
             <p></p>
-            <img :src="findItem.path" />
+            <img :src="findPost.path" />
             <br />
-            <textarea v-model="findItem.text" cols=50 rows=4 placeholder="Description" ></textarea>
+            <textarea v-model="findPost.text" cols=50 rows=4 placeholder="Description" ></textarea>
           </div>
-          <div class="actions" v-if="findItem">
-            <button @click="deleteItem(findItem)">Delete</button>
-            <button @click="editItem(findItem)">Edit</button>
+          <div class="actions" v-if="findPost">
+            <button @click="deleteItem(findPost)">Delete</button>
+            <button @click="editItem(findPost)">Edit</button>
           </div>
         </div>-->
        </div>  
@@ -67,10 +67,10 @@ export default {
       username: "",
       file: null,
       personComment: "",
-      addItem: null,
+      addPost: null,
       posts: [],
       findUsername: "",
-      findItem: null,
+      findPost: null,
     }
   },
   computed: {
@@ -104,7 +104,7 @@ export default {
           path: r1.data.path,
           text: this.personComment,
         });
-        this.addItem = r2.data;
+        this.addPost = r2.data;
         this.name = "";
         this.username = "";
         this.personComment = "";
@@ -142,7 +142,7 @@ export default {
           name: this.findPost.name,
           text: this.findPost.text,
         });
-        this.findItem = null;
+        this.findPost = null;
         this.getItems();
         return true;
       } catch (error) {
@@ -154,6 +154,10 @@ export default {
 </script>
 
 <style>
+body{
+  background: #3c3c42;
+}
+
 .AddPost{
   background-color: white;
 }
@@ -173,14 +177,14 @@ export default {
   padding-right: 10%;
   padding-top: 5px;
   margin-bottom: 10px;
-  max-width: 50%;
+  max-width: 60%;
 
 }
 
 input {
   font-size: 1.2em;
   height: 30px;
-  width: 200px;
+  width: 250px;
   border-radius: 5px;
   margin-right: 5px;
 }
@@ -244,7 +248,7 @@ button {
   font-size: 1em;
 }
 .form {
-  margin-right: 50px;
+  margin-right: 0px;
 }
 /* Uploaded images */
 .upload h2 {
@@ -262,7 +266,7 @@ button {
   min-height: 20px;
 }
 .suggestion:hover {
-  background-color: #5BDEFF;
+  background-color: #3c3c42;
   color: #fff;
 } 
 </style>

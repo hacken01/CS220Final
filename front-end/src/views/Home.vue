@@ -16,14 +16,23 @@
   </div>
     
   <!--<UserList :users="users" />-->
-  <section class="image-gallery">
-    <div class="image" v-for="post in posts" :key="post.id">
-      <h2>{{post.name}}</h2>
-      <h2>{{post.username}}</h2>
-      <img :src="post.path" />
-      <p>{{post.personComment}}</p>
+  <div class="wrapper">
+    <div class="users">
+
+      <div class="user" v-for="post in posts" :key="post.id">
+        <div class="info">
+        <h2>{{post.name}}</h2>
+        <h2>{{post.username}}</h2>
+        <p>{{post.personComment}}</p>
+        </div>
+        <div class="image">
+        <img :src="post.path" />
+        </div>
+        </div>
+
+      
     </div>
-  </section>
+  </div>
 
 
 </div>
@@ -43,10 +52,10 @@ export default {
     }
   },
    created() {
-    this.getItems();
+    this.getPosts();
   },
   methods: {
-    async getItems() {
+    async getPosts() {
       try {
         let response = await axios.get("/api/posts");
         this.posts = response.data;
@@ -101,12 +110,12 @@ export default {
 }
 
 form {
-  display: table;
+  
   width: 100%;
 }
 
 i {
-  display: table-cell;
+
   padding-left: 10px;
   padding-right: 10px;
   width: 1px;
@@ -114,7 +123,6 @@ i {
 }
 
 input {
-  display: table-cell;
   font-size: 20px;
   border: none !important;
   box-shadow: none !important;
@@ -136,11 +144,83 @@ input {
 }
 .image {
   margin: 0 0 1.5em;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   width: 100%;
 }
 .image img {
   width: 100%;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.users {
+  margin-top: 20px;
+  margin-bottom: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  overflow-y:auto;
+  height: 400px;
+  width: 65%;
+
+}
+
+.user {
+  margin: 10px;
+  margin-top: 40px;
+  width: 400px;
+  background-color: white;
+  border: 15px solid #42b983;
+  border-radius: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+}
+
+.user:hover{
+  border-color: grey;
+}
+
+.user img {
+  
+  height: 350px;
+  width: 250px;
+  object-fit: cover;
+  padding-top: 15px;
+}
+
+.user .image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.info {
+  background-color: white;
+  color: #000;
+  padding: 10px;
+  height: 80px;
+  margin-bottom: 20px;
+}
+
+.info h1 {
+  font-size: 16px;
+}
+
+.info h2 {
+  font-size: 14px;
+}
+
+.info p {
+  margin: 0px;
+  font-size: 10px;
 }
 /* Masonry on large screens */
 @media only screen and (min-width: 1024px) {
