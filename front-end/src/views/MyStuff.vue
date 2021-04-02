@@ -21,36 +21,36 @@
             <button @click="upload">Upload</button>
           </div>
           <div class="upload" v-if="addPost">
-            <h2>{{addPost.title}}</h2>
+            <h2>{{addPost.name}}</h2>
+            <h2>{{addPost.username}}</h2>
+            <p>{{addPost.personComment}}</p>
             <img :src="addPost.path" />
-            <p>{{addPost.text}}</p>
           </div>
         </div>
-        <!--
+        
         <div class="heading">
-          <div class="circle"></div>
-          <h2>Edit/Delete an Item</h2>
+          <h2>Edit/Delete a Post</h2>
         </div>
         <div class="edit">
           <div class="form">
-            <input v-model="findTitle" placeholder="Search">
+            <input v-model="findUsername" placeholder="Search">
             <div class="suggestions" v-if="suggestions.length > 0">
-              <div class="suggestion" v-for="s in suggestions" :key="s.id" @click="selectItem(s)">{{s.title}}
+              <div class="suggestion" v-for="s in suggestions" :key="s.id" @click="selectPost(s)">{{s.username}}
               </div>
             </div>
           </div>
           <div class="upload" v-if="findPost">
-            <input v-model="findPost.title">
+            <input v-model="findPost.username">
             <p></p>
             <img :src="findPost.path" />
             <br />
-            <textarea v-model="findPost.text" cols=50 rows=4 placeholder="Description" ></textarea>
+            <textarea v-model="findPost.personComment" cols=50 rows=4 placeholder="Comment" ></textarea>
           </div>
           <div class="actions" v-if="findPost">
             <button @click="deleteItem(findPost)">Delete</button>
             <button @click="editItem(findPost)">Edit</button>
           </div>
-        </div>-->
+        </div>
        </div>  
       </div>
     </div>
@@ -101,8 +101,8 @@ export default {
         let r2 = await axios.post('/api/posts', {
           name: this.name,
           username: this.username,
+          personComment: this.personComment,
           path: r1.data.path,
-          text: this.personComment,
         });
         this.addPost = r2.data;
         this.name = "";
@@ -130,20 +130,21 @@ export default {
       try {
         await axios.delete("/api/posts/" + post._id);
         this.findPost = null;
-        this.getItems();
+        this.getPosts();
         return true;
       } catch (error) {
          console.log(error);
       }
     },
-    async editItem(item) {
+    async editItem(post) {
       try {
         await axios.put("/api/posts/" + post._id, {
-          name: this.findPost.name,
-          text: this.findPost.text,
+          name: this.name,
+          username: this.findPost.username,
+          personComment: this.findPost.personComment,
         });
         this.findPost = null;
-        this.getItems();
+        this.getPosts();
         return true;
       } catch (error) {
          console.log(error);
