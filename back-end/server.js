@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
 
 const app = express();
 app.use(bodyParser.json());
@@ -7,7 +8,6 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-const mongoose = require('mongoose');
 //get images from multer
 const multer = require('multer');
 
@@ -19,27 +19,23 @@ const upload = multer({
     }
 });
 
-/*// List of comments 
-const commentShema = new mongoose.Schema({
-    username: String,
-    post: String,
-});*/
+// connect to the database
+mongoose.connect('mongodb://localhost:27017/twitcherest', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
-// create a scheme for Person in the post
+// create a scheme for Posts
 const postSchema = new mongoose.Schema({
     name: String,
     username: String,
     personComment: String,
     //this is the path of the image
     path: String,
-    /*commentSchema: new mongoose.Schema({
-        username: String,
-        post: String,
-    })*/
 });
+
 // Create a model for the posts.
 const Post = mongoose.model('Post', postSchema);
-//const Comment = mongoose.model('Comment', commentSchema);
 
 // Upload a photo. Uses the multer middleware for the upload and then returns
 // the path where the photo is stored in the file system.
@@ -51,11 +47,6 @@ app.post('/api/photos', upload.single('photo'), async(req, res) => {
     res.send({
         path: "/images/" + req.file.filename
     });
-});
-
-// connect to the database
-mongoose.connect('mongodb://localhost:27017/twitcherest', {
-    useNewUrlParser: true
 });
 
 // Create a new Post for the user
@@ -75,6 +66,7 @@ app.post('/api/posts', async(req, res) => {
         res.sendStatus(500);
     }
 });
+
 // Get a list of all of the Posts in the .
 app.get('/api/posts', async(req, res) => {
     try {
@@ -85,23 +77,66 @@ app.get('/api/posts', async(req, res) => {
         res.sendStatus(500);
     }
 });
-/** 
+
+
+// Schema for comments
+const commentSchema = new mongoose.Schema({
+    post: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Post'
+    },
+    username: String,
+    otherComment: String,
+})
+
+//Model for comments
+const Comment = mongoose.model('Comment', commentSchema);
 
 // Create a new Comment to post
-app.post('/api/posts/:id', async(req, res) => {
-
-    const post = await Post.findOne({
-        _id: req.params.id
-    });
-
-    post.username = req.body.username;
-    post.post = req.body.post;
-
-    post.comments.push(new Comment)({ //FIX ME
-        username: req.body.username,
-        post: req.body.post,
-    });
+app.post('/api/posts/:postsID/comments', async(req, res) => {
     try {
+        let comment = await Post.findOne({ _id: req.params.postID });
+        if (!post) {
+            res.send(404);
+            return;
+        }
+        let comment = new Comment({
+            post: post,
+            username: req.body.username,
+            otherComment: req.body.otherComment,
+        });
+        await comment.save();
+        res.send(comment);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+});
+
+app.get('/api/posts/:postID/comments', async(req, res) => {
+    try {
+        let post = await Post.findOne({ _id: req.params.postID });
+        if (!post) {
+            res.send(404);
+            return;
+        }
+        let comments = await Comment.find({ post: post });
+        res.send(comments);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+});
+
+app.put('/api/posts/:postID/comments/:commentID', async(req, res) => {
+    try {
+        let comment = await Comments.findOne({ _id: req.params.commentID, post: req.params.postID });
+        if (!comment) {
+            res.send(404);
+            return;
+        }
+        comment.username = req.body.username;
+        comment.otherComment = req.body.otherComment;
         await comment.save();
         res.send(comment);
     } catch (error) {
@@ -112,11 +147,14 @@ app.post('/api/posts/:id', async(req, res) => {
 
 
 //delete the Post from the database
-app.delete('/api/Posts/:id', async(req, res) => {
+app.delete('/api/posts/:postID/comments/:commentID', async(req, res) => {
     try {
-        await Post.deleteOne({
-            _id: req.params.id
-        });
+        let comment = await Comment.findOne({ _id: req.params.commentID, post: req.params.postID });
+        if (!comment) {
+            res.send(404);
+            return;
+        }
+        await comment.delete();
         res.sendStatus(200);
     } catch (error) {
         console.log(error);
@@ -124,7 +162,7 @@ app.delete('/api/Posts/:id', async(req, res) => {
     }
 });
 
-//edit the Post
+/*//edit the Post
 app.put('/api/Posts/:id', async(req, res) => {
     try {
         const Post = await Post.findOne({
@@ -140,7 +178,6 @@ app.put('/api/Posts/:id', async(req, res) => {
         console.log(error);
         res.sendStatus(500);
     }
-});
-**/
+});*/
 
 app.listen(4000, () => console.log('Server listening on port 4000!'));
