@@ -28,6 +28,8 @@
         <div class="image">
         <img :src="post.path" />
         </div>
+        <input class="commentBox" type="text" id="commentInput" placeholder="Comment">
+        <button type="submit" value="Comment">Comment</button>
         </div>
 
       
@@ -222,6 +224,13 @@ input {
   margin: 0px;
   font-size: 10px;
 }
+
+.commentBox{
+  height: 50px;
+  width: 100%;
+  margin-bottom: 0px;
+}
+
 /* Masonry on large screens */
 @media only screen and (min-width: 1024px) {
   .image-gallery {
