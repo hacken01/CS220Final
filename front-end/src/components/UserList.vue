@@ -17,6 +17,15 @@
         <button class="auto" v-on:click="addToMyStuff(user)">Like</button> <!--PUT BEHAVIOR THAT PUSHES THIS TO CART ARRAY-->
         <button class="auto" >Follow</button> <!--Not functional yet-->
       </div>
+      <!--<form v-if="creating" @submit.prevent="addComment">
+          <textarea v-model="comment" placeholder="Comment..."></textarea>
+          <br />
+          <button type="submit">Submit</button>
+        </form>
+        <div v-else>
+          <p>Awesome Comment!!!</p>
+          <p><a @click="toggleForm" href="#">Leave another comment</a></p>
+        </div>-->
     </div>
   </div>
 </div>
@@ -28,12 +37,35 @@ export default {
   props: {
     users: Array
   },
+  data() {
+    return {
+      creating: true,
+      firstname: '',
+      lastname: '',
+      comment: '',
+    }
+  },
+  /*computed: {
+    comments() {
+      return this.$root.$data.getComments();
+    },
+  },*/
   methods: {
-      addToMyStuff(newUser) {
-          this.$root.$data.addToMyStuff(newUser);
-          this.$root.$data.updateMyPostsNum();
-          console.log(this.$root.$data.following);
-      }
+    addToMyStuff(newUser) {
+        this.$root.$data.addToMyStuff(newUser);
+        this.$root.$data.updateMyPostsNum();
+        console.log(this.$root.$data.following);
+    },
+    /*toggleForm() {
+    this.creating = !this.creating;
+    },
+    addComment() {
+      this.$root.$data.addComment(this.firstname, this.lastname, this.comment);
+      this.firstname = "",
+      this.lastname= "",
+      this.comment= "",
+      this.creating = true;
+    },*/
   }
 }
 </script>
@@ -130,5 +162,19 @@ button:hover{
 
 .auto {
   margin-left: auto;
+}
+
+textarea{
+  color: #42b983;
+}
+
+textarea:hover{
+  color: blue;
+  
+}
+
+textarea:not(:hover){
+  color: pink;
+  
 }
 </style>

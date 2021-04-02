@@ -16,6 +16,7 @@
       <div class="add">
         <button class="auto" v-on:click="removefromMyPosts(user)">Unike</button> <!--PUT BEHAVIOR THAT PUSHES THIS TO CART ARRAY-->
       </div>
+      
     </div>
   </div>
 </div>
@@ -28,11 +29,11 @@ export default {
     users: Array
   },
   methods: {
-      removefromMyPosts(newUser) {
-          this.$root.$data.removefromMyPosts(newUser);
-          this.$root.$data.decreaseMyPostsNum();
-          console.log(this.$root.$data.following);
-      }
+    removefromMyPosts(newUser) {
+        this.$root.$data.removefromMyPosts(newUser);
+        this.$root.$data.decreaseMyPostsNum();
+        console.log(this.$root.$data.following);
+    },
   }
 }
 </script>
