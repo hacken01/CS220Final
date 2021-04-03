@@ -22,9 +22,9 @@
       <div class="user" v-for="post in posts" :key="post.id">
         <div class="info">
         <h2>{{post.name}}</h2>
-        <h2>{{post.username}}</h2>
-        
+        <h2>{{post.username}}</h2> 
         </div>
+        
         <div class="image">
         <img :src="post.path" />
         </div>
@@ -32,8 +32,8 @@
         <input   class="commentBox" type="text" v-model="otherComment">
         <button @click="addComment(post)" type="submit" value="Comment">Add Comment</button>
         <ul>
-          <li v-for="comment in comments ":key="comment.id">
-              {{comment[post._id].otherComment }}
+          <li v-for="comment in comments[post._id] ":key="comment.id">
+              {{comment.otherComment}}
           </li>
         </ul>
       </div>
@@ -82,7 +82,9 @@ export default {
           const response = await axios.get(`/api/posts/${post._id}/comments`);
           this.comments[post._id] = response.data;
           //Vue.set(this.comments,post._id,response.data); 
+           console.log(this.comments[post._id]);
         }
+       
         console.log("comments loaded");
       } catch (error) {
         console.log(error);
