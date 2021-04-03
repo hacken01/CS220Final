@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <template>
 
 <div>
@@ -23,17 +22,19 @@
       <div class="user" v-for="post in posts" :key="post.id">
         <div class="info">
         <h2>{{post.name}}</h2>
-        <h2>{{post.username}}</h2>
-        <p>{{post.personComment}}</p>
+        <h2>{{post.username}}</h2> 
         </div>
         <div class="image">
         <img :src="post.path" />
         </div>
-        <input class="commentBox" type="text" id="commentInput" placeholder="Comment">
-        <button type="submit" value="Comment">Comment</button>
-        </div>
-
-      
+        <p>{{post.personComment}}</p>
+        <input   class="commentBox" type="text" v-model="otherComment">
+        <button @click="addComment(post)" type="submit" value="Comment">Add Comment</button>
+        <ul>
+          <li v-for="comment in comments[post._id] ":key="comment.id">
+              {{comment.otherComment}}
+          </li>
+        </ul> 
     </div>
   </div>
 
@@ -63,6 +64,35 @@ export default {
         let response = await axios.get("/api/posts");
         this.posts = response.data;
         return true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getComments() {
+      try {
+
+        for(let post of this.posts){
+          const response = await axios.get(`/api/posts/${post._id}/comments`);
+          this.comments[post._id] = response.data;
+          //Vue.set(this.comments,post._id,response.data); 
+           console.log(this.comments[post._id]);
+        }
+       
+        console.log("comments loaded");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async addComment(post) {
+      console.log("comment Added");
+      try {
+        await axios.post(`/api/posts/${post._id}/comments`, {
+          username: this.username,
+          otherComment: this.otherComment,
+        });
+        this.username = "";
+        this.otherComment = "";
+        this.getComments();
       } catch (error) {
         console.log(error);
       }
@@ -251,7 +281,6 @@ input {
   }
 }
 </style>
-=======
 <template>
 
 <div>
@@ -541,4 +570,16 @@ input {
   }
 }
 </style>
->>>>>>> fb5f1b23cb212a22fd14cc46f2f22539789a9278
+reens */
+@media only screen and (max-width: 1023px) and (min-width: 768px) {
+  .image-gallery {
+    column-count: 3;
+  }
+}
+/* Masonry on small screens */
+@media only screen and (max-width: 767px) and (min-width: 540px) {
+  .image-gallery {
+    column-count: 2;
+  }
+}
+</style>

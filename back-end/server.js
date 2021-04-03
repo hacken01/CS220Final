@@ -35,10 +35,9 @@ const postSchema = new mongoose.Schema({
 
 // Create a model for the posts.
 const Post = mongoose.model('Post', postSchema);
-
 // Upload a photo. Uses the multer middleware for the upload and then returns
 // the path where the photo is stored in the file system.
-app.post('/api/photos', upload.single('photo'), async(req, res) => {
+app.post('/api/photos', upload.single('photo'), async (req, res) => {
     // Just a safety check
     if (!req.file) {
         return res.sendStatus(400);
@@ -49,7 +48,7 @@ app.post('/api/photos', upload.single('photo'), async(req, res) => {
 });
 
 // Create a new Post for the user
-app.post('/api/posts', async(req, res) => {
+app.post('/api/posts', async (req, res) => {
     const post = new Post({
         name: req.body.name,
         username: req.body.username,
@@ -67,7 +66,7 @@ app.post('/api/posts', async(req, res) => {
 });
 
 // Get a list of all of the Posts
-app.get('/api/posts', async(req, res) => {
+app.get('/api/posts', async (req, res) => {
     try {
         let posts = await Post.find(); // find returns all the posts
         res.send(posts);
@@ -76,7 +75,6 @@ app.get('/api/posts', async(req, res) => {
         res.sendStatus(500);
     }
 });
-
 
 // Schema for comments
 const commentSchema = new mongoose.Schema({
@@ -92,7 +90,7 @@ const commentSchema = new mongoose.Schema({
 const Comment = mongoose.model('Comment', commentSchema);
 
 // Create a new Comment to post
-app.post('/api/posts/:postID/comments', async(req, res) => {
+app.post('/api/posts/:postID/comments', async (req, res) => {
     try {
         let post = await Post.findOne({ _id: req.params.postID });
         if (!post) {
@@ -104,6 +102,8 @@ app.post('/api/posts/:postID/comments', async(req, res) => {
             username: req.body.username,
             otherComment: req.body.otherComment,
         });
+        console.log("new Comment");
+        console.log(comment.otherComment);
         await comment.save();
         res.send(comment);
     } catch (error) {
@@ -113,7 +113,7 @@ app.post('/api/posts/:postID/comments', async(req, res) => {
 });
 
 // get the list of all the comments
-app.get('/api/posts/:postID/comments', async(req, res) => {
+app.get('/api/posts/:postID/comments', async (req, res) => {
     try {
         let post = await Post.findOne({ _id: req.params.postID });
         if (!post) {
@@ -129,7 +129,7 @@ app.get('/api/posts/:postID/comments', async(req, res) => {
 });
 
 //function to update the comments 
-app.put('/api/posts/:postID/comments/:commentID', async(req, res) => {
+app.put('/api/posts/:postID/comments/:commentID', async (req, res) => {
     try {
         let comment = await Comment.findOne({ _id: req.params.commentID, post: req.params.postID });
         if (!comment) {
@@ -148,7 +148,7 @@ app.put('/api/posts/:postID/comments/:commentID', async(req, res) => {
 
 
 //delete the Post from the database
-app.delete('/api/posts/:postID/comments/:commentID', async(req, res) => {
+app.delete('/api/posts/:postID/comments/:commentID', async (req, res) => {
     try {
         let comment = await Comment.findOne({ _id: req.params.commentID, post: req.params.postID });
         if (!comment) {
@@ -169,8 +169,10 @@ app.put('/api/Posts/:id', async(req, res) => {
         const Post = await Post.findOne({
             _id: req.params.id
         });
+
         Post.description = req.body.description;
         Post.topic = req.body.topic;
+
         await Post.save();
         res.sendStatus(200);
     } catch (error) {
