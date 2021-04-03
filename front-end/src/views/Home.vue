@@ -24,7 +24,6 @@
         <h2>{{post.name}}</h2>
         <h2>{{post.username}}</h2> 
         </div>
-        
         <div class="image">
         <img :src="post.path" />
         </div>
@@ -37,8 +36,15 @@
           </li>
         </ul>
       </div>
+        <input class="commentBox" type="text" id="commentInput" placeholder="Comment">
+        <button type="submit" value="Comment">Comment</button>
+        </div>
+
+      
     </div>
   </div>
+
+
 </div>
 </template>
 
@@ -53,17 +59,10 @@ export default {
   data() {
     return {
       posts: [],
-      post: null,
-      username:'john',
-      otherComment:'',
-      comments : {},
     }
   },
    created() {
     this.getPosts();
-  },
-  computed: {
-
   },
   methods: {
     async getPosts() {
