@@ -3,57 +3,90 @@
     <div class="Following">
       <div class="titleBox" id="1">
         <h1> My Posts </h1>
-        <h3>Number of Comments:</h3>
-        
-        <div class="heading">
-        
-        <h2>Add an Item</h2>
-        </div>
-        <div class="add">
-          <div class="form">
-            <input v-model="name" placeholder="Name">
-            <p></p>
-            <input v-model="username" placeholder="Username">
-            <p></p>
-            <input type="file" name="photo" @change="fileChanged">
-            <br />
-            <textarea v-model="personComment" cols=50 rows=4 placeholder="Comment" ></textarea>
-            <button @click="upload">Upload</button>
+      </div>      
+    </div>
+
+    <div class="wrapper">
+    <!--Add-->
+        <div class="ActionBox">      
+          <div class="heading">
+          <h2>Add an Item</h2>
           </div>
-          <div class="upload" v-if="addPost">
-            <h2>{{addPost.name}}</h2>
-            <h2>{{addPost.username}}</h2>
-            <p>{{addPost.personComment}}</p>
-            <img :src="addPost.path" />
+          <div class="add">
+            <div class="form">
+              <input v-model="name" placeholder="Name">
+              <p></p>
+              <input v-model="username" placeholder="Username">
+              <p></p>
+              <input type="file" name="photo" @change="fileChanged">
+              <br />
+              <textarea v-model="personComment" cols=50 rows=4 placeholder="Comment" ></textarea>
+              <button @click="upload">Upload</button>
+            </div>
+            <div class="upload" v-if="addPost">
+              <h2>{{addPost.name}}</h2>
+              <h2>{{addPost.username}}</h2>
+              <p>{{addPost.personComment}}</p>
+              <img :src="addPost.path" />
+            </div>
           </div>
         </div>
-        
-        <div class="heading">
-          <h2>Edit/Delete a Post</h2>
-        </div>
-        <div class="edit">
-          <div class="form">
-            <input v-model="findUsername" placeholder="Search">
-            <div class="suggestions" v-if="suggestions.length > 0">
-              <div class="suggestion" v-for="s in suggestions" :key="s.id" @click="selectPost(s)">{{s.username}}
+
+        <!--Edit/Delete--> 
+        <div class="ActionBox"> 
+          <div class="heading">
+            <h2>Select Post</h2>
+          </div>
+          <div class="edit">
+            <div class="form">
+              <input v-model="findUsername" placeholder="Search">
+              <div class="suggestions" v-if="suggestions.length > 0">
+                <div class="suggestion" v-for="s in suggestions" :key="s.id" @click="selectPost(s)">{{s.username}}
+                </div>
               </div>
             </div>
           </div>
-          <div class="upload" v-if="findPost">
-            <input v-model="findPost.username">
-            <p></p>
-            <img :src="findPost.path" />
-            <br />
-            <textarea v-model="findPost.personComment" cols=50 rows=4 placeholder="Comment" ></textarea>
-          </div>
-          <div class="actions" v-if="findPost">
-            <button @click="deleteItem(findPost)">Delete</button>
-            <button @click="editItem(findPost)">Edit</button>
+        </div>
+
+        <!--Edit/Delete--> 
+        <div class="ActionBox"> 
+          <div class="heading">
+            <h2>Edit/Delete a Post</h2>
+            <div class="upload" v-if="findPost">
+              <input v-model="findPost.username">
+              <p></p>
+              <div class="selectedImage">
+              <img :src="findPost.path" />
+              </div>
+              <br />
+              <textarea v-model="findPost.personComment" cols=50 rows=4 placeholder="Comment" ></textarea>
+            </div>
+            <div class="actions" v-if="findPost">
+              <button @click="deleteItem(findPost)">Delete</button>
+              <button @click="editItem(findPost)">Edit</button>
+            </div>
           </div>
         </div>
-       </div>  
-      </div>
     </div>
+
+    <!--Posts--> 
+    <div class="wrapper">
+        <div class="users">
+          <div class="user" v-for="post in posts" :key="post.id">
+            <div class="info">
+              <h2>{{post.name}}</h2>
+              <h2>{{post.username}}</h2>
+              <p>{{post.personComment}}</p>
+            </div>
+            <div class="image">
+              <img :src="post.path" />
+            </div>
+            <input class="commentBox" type="text" id="commentInput" placeholder="Comment">
+            <button type="submit" value="Comment">Comment</button>
+          </div>
+        </div>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -71,6 +104,7 @@ export default {
       posts: [],
       findUsername: "",
       findPost: null,
+      numPosts: 0,
     }
   },
   computed: {
@@ -171,15 +205,24 @@ body{
 }
 
 .titleBox{
-  
   border-radius: 5px;
-  background-color: #42b983;
+  background-color: #3c3c42;
   padding-left: 10%;
   padding-right: 10%;
-  padding-top: 5px;
-  margin-bottom: 10px;
-  max-width: 60%;
+  width: 40%;
+  margin-bottom: 20px;
+}
 
+.ActionBox{
+  background: #42b983;
+  align-content: flex-start;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  max-height: 500px;
+  min-height: 400px;
 }
 
 input {
@@ -193,8 +236,10 @@ input {
 textarea {
   font-size: 1.6em;
   width: 100%;
-  max-width: 500px;
-  height: 100px;
+  max-width: 600px;
+  min-width: 200px;
+  max-height: 100px;
+  min-height: fit-content;
   border-radius: 5px;
 }
 
@@ -203,6 +248,11 @@ button {
   margin-bottom: 20px;
   font-size: 1.2em;
   border-radius: 5px;
+}
+
+.selectedImage{
+  overflow: auto;
+  max-height: 200px;
 }
 
 #CommentBox {
@@ -230,6 +280,12 @@ button {
 .add,
 .edit {
   display: flex;
+  background: white;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  min-height: 300px;
+  text-align: center;
 }
 .circle {
   border-radius: 50%;
@@ -240,6 +296,11 @@ button {
   color: #fff;
   text-align: center
 }
+
+h1{
+  color: #42b983;
+  text-align: center;
+}
 /* Form */
 input,
 textarea,
@@ -247,6 +308,7 @@ select,
 button {
   font-family: 'Montserrat', sans-serif;
   font-size: 1em;
+  resize: none;
 }
 .form {
   margin-right: 0px;
@@ -269,5 +331,63 @@ button {
 .suggestion:hover {
   background-color: #3c3c42;
   color: #fff;
-} 
+}
+
+.wrapper {
+  display: flex-box;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+}
+
+.users {
+  margin-top: 20px;
+  margin-bottom: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  overflow-y:auto;
+  height: 400px;
+  width: 65%;
+
+}
+
+.user {
+  margin: 10px;
+  margin-top: 40px;
+  width: 400px;
+  background-color: white;
+  border: 15px solid #42b983;
+  border-radius: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+}
+
+.user:hover{
+  border-color: grey;
+}
+
+.user img {
+  
+  height: 350px;
+  width: 250px;
+  object-fit: cover;
+  padding-top: 15px;
+}
+
+.user .image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.info {
+  background-color: white;
+  color: #000;
+  padding: 10px;
+  height: 80px;
+  margin-bottom: 20px;
+}
+
 </style>
