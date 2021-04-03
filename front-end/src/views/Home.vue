@@ -23,20 +23,22 @@
         <div class="info">
         <h2>{{post.name}}</h2>
         <h2>{{post.username}}</h2>
-        <p>{{post.personComment}}</p>
+        
         </div>
         <div class="image">
         <img :src="post.path" />
         </div>
-        <input class="commentBox" type="text" id="commentInput" placeholder="Comment">
-        <button type="submit" value="Comment">Comment</button>
-        </div>
-
-      
+        <p>{{post.personComment}}</p>
+        <input   class="commentBox" type="text" v-model="otherComment">
+        <button @click="addComment(post)" type="submit" value="Comment">Add Comment</button>
+        <ul>
+          <li v-for="comment in comments ":key="comment.id">
+              {{comment[post._id].otherComment }}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-
-
 </div>
 </template>
 
@@ -51,10 +53,17 @@ export default {
   data() {
     return {
       posts: [],
+      post: null,
+      username:'john',
+      otherComment:'',
+      comments : {},
     }
   },
    created() {
     this.getPosts();
+  },
+  computed: {
+
   },
   methods: {
     async getPosts() {
@@ -62,6 +71,33 @@ export default {
         let response = await axios.get("/api/posts");
         this.posts = response.data;
         return true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getComments() {
+      try {
+
+        for(let post of this.posts){
+          const response = await axios.get(`/api/posts/${post._id}/comments`);
+          this.comments[post._id] = response.data;
+          //Vue.set(this.comments,post._id,response.data); 
+        }
+        console.log("comments loaded");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async addComment(post) {
+      console.log("comment Added");
+      try {
+        await axios.post(`/api/posts/${post._id}/comments`, {
+          username: this.username,
+          otherComment: this.otherComment,
+        });
+        this.username = "";
+        this.otherComment = "";
+        this.getComments();
       } catch (error) {
         console.log(error);
       }
