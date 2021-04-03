@@ -59,7 +59,7 @@ html {
 }
 
 .column {
-  float: center;
+  
   display: inline-block;
   width: 25%;
   margin-bottom: 16px;
