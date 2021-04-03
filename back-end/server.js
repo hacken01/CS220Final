@@ -169,10 +169,8 @@ app.put('/api/Posts/:id', async(req, res) => {
         const Post = await Post.findOne({
             _id: req.params.id
         });
-
         Post.description = req.body.description;
         Post.topic = req.body.topic;
-
         await Post.save();
         res.sendStatus(200);
     } catch (error) {
