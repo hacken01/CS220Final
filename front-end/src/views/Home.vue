@@ -46,6 +46,7 @@
 
 <script>
 import axios from 'axios';
+import Vue from 'vue';
 //import UserList from "../components/UserList.vue"
 export default {
   name: 'Home',
@@ -63,6 +64,7 @@ export default {
   },
   created() {
     this.getPosts();
+    this.getComments();
   },
   methods: {
     async getPosts() {
@@ -79,7 +81,8 @@ export default {
       try {
         for(let post of this.posts){
           const response = await axios.get(`/api/posts/${post._id}/comments`);
-          this.comments[post._id] = response.data;
+          // use vue.set to make it reactive 
+          Vue.set(this.comments,post._id,response.data); 
         }
       } catch (error) {
         console.log(error);

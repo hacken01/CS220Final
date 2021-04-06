@@ -62,8 +62,8 @@
               <textarea v-model="findPost.personComment" cols=50 rows=4 placeholder="Comment" ></textarea>
             </div>
             <div class="actions" v-if="findPost">
-              <button @click="deleteItem(findPost)">Delete</button>
-              <button @click="editItem(findPost)">Edit</button>
+              <button @click="deletePost(findPost)">Delete Post</button>
+              <button @click="editPost(findPost)">Edit Post</button>
             </div>
           </div>
         </div>
@@ -173,8 +173,9 @@ export default {
       this.findUsername = "";
       this.findPost = post;
     },
-    async deleteItem(post) {
+    async deletePost(post) {
       try {
+        console.log("post deleted");
         await axios.delete("/api/posts/" + post._id);
         this.findPost = null;
         this.getPosts();
@@ -183,7 +184,7 @@ export default {
          console.log(error);
       }
     },
-    async editItem(post) {
+    async editPost(post) {
       try {
         await axios.put("/api/posts/" + post._id, {
           name: this.name,
