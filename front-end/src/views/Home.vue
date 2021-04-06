@@ -18,29 +18,24 @@
   <!--<UserList :users="users" />-->
   <div class="wrapper">
     <div class="users">
-
       <div class="user" v-for="post in posts" :key="post.id">
         <div class="info">
         <h2>{{post.name}}</h2>
         <h2>{{post.username}}</h2> 
         </div>
-        
         <div class="image">
         <img :src="post.path" />
         </div>
         <p>{{post.personComment}}</p>
         <!--<div class="commentList">-->
-        <input class="commentBox" type="text" v-bind="otherComment" >
+        <input class="commentBox" type="text" v-model="otherComment" >
         <button @click="addComment(post)" type="submit" value="Comment">Add Comment</button>
-        
           <h3>Comments:</h3>
         <ul>
           <li v-for="comment in comments[post._id] " :key="comment.id">
               {{comment.otherComment}}
-
           </li>
         </ul>
-        
       </div>
     </div>
   </div>
@@ -101,6 +96,24 @@ export default {
         });
         this.username = "";
         this.otherComment = "";
+        this.getComments();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async editComment(postId,commentId){
+      try {
+        axios.put(`/api/posts/${postId}/comments/${commentId}`, {
+          otherComment: this.otherComment,
+        });
+        this.getComments();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async deleteComment(postId, commentId) {
+      try {
+        await axios.delete(`/api/posts/${postId}/comments/${commentId}`);
         this.getComments();
       } catch (error) {
         console.log(error);
