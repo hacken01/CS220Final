@@ -89,6 +89,7 @@
           <li v-for="comment in comments[post._id] " :key="comment.id">
               {{comment.otherComment}}
           <button @click="deleteComment(post._id,comment._id)" type="submit" value="R">R</button>
+          <button @click="editComment(post._id,comment._id)" type="submit" value="E">E</button>
           </li>
         </ul>
           </div>
