@@ -11,9 +11,9 @@
   <div class="browseTitle">
   <h1 class="titleBox">Browse:</h1>
   </div>
-  <div class="browseTitle">
+  <!--<div class="browseTitle">
   <h4 class="titleBox">Examples:<h4>Superhero, Technology, Video Games, Science, Dino, Other</h4></h4>
-  </div>
+  </div>-->
     
   <!--<UserList :users="users" />-->
   <div class="wrapper">
@@ -29,13 +29,17 @@
         <img :src="post.path" />
         </div>
         <p>{{post.personComment}}</p>
+        <!--<div class="commentList">-->
         <input   class="commentBox" type="text" v-model="otherComment">
         <button @click="addComment(post)" type="submit" value="Comment">Add Comment</button>
+        
+          <h3>Comments:</h3>
         <ul>
-          <li v-for="comment in comments[post._id] ":key="comment.id">
+          <li v-for="comment in comments[post._id] " :key="comment.id">
               {{comment.otherComment}}
           </li>
         </ul>
+        
       </div>
     </div>
   </div>
@@ -59,16 +63,15 @@ export default {
       comments : {},
     }
   },
-   created() {
+  created() {
     this.getPosts();
-  },
-  computed: {
   },
   methods: {
     async getPosts() {
       try {
         let response = await axios.get("/api/posts");
         this.posts = response.data;
+        this.getComments();
         return true;
       } catch (error) {
         console.log(error);
@@ -124,6 +127,7 @@ export default {
   align-items: center;
   justify-content: center;
   text-align: center;
+  color: #3c3c42;
 }
 .titleBox{
   
@@ -134,6 +138,7 @@ export default {
   padding-top: 5px;
   margin-bottom: 0px;
   max-width: 50%;
+  color: #3c3c42;
 }
 .search {
   border: 1px solid #ccc;
@@ -241,6 +246,14 @@ input {
   height: 50px;
   width: 100%;
   margin-bottom: 0px;
+}
+
+.commentList {
+  border: 2px solid black;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  text-align: left;
+  padding-left: 5px;
 }
 /* Masonry on large screens */
 @media only screen and (min-width: 1024px) {
