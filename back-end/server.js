@@ -76,7 +76,7 @@ app.get('/api/posts', async (req, res) => {
 //edit the Post
 app.put('/api/posts/:id', async (req, res) => {
     try {
-        const Post = await Post.findOne({
+        let Post = await Post.findOne({
             _id: req.params.id
         });
         Post.personComment = req.body.personComment;
