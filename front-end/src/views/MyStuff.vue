@@ -76,13 +76,21 @@
             <div class="info">
               <h2>{{post.name}}</h2>
               <h2>{{post.username}}</h2>
-              <p>{{post.personComment}}</p>
             </div>
             <div class="image">
               <img :src="post.path" />
             </div>
-            <input class="commentBox" type="text" id="commentInput" placeholder="Comment">
-            <button type="submit" value="Comment">Comment</button>
+            <p>{{post.personComment}}</p>
+            <!--<div class="commentList">-->
+        <input class="commentBox" type="text" v-model="otherComment" >
+        <button @click="addComment(post)" type="submit" value="Comment">Add Comment</button>
+          <h3>Comments:</h3>
+        <ul>
+          <li v-for="comment in comments[post._id] " :key="comment.id">
+              {{comment.otherComment}}
+          <button @click="deleteComment(post._id,comment._id)" type="submit" value="R">R</button>
+          </li>
+        </ul>
           </div>
         </div>
       </div>
@@ -105,6 +113,9 @@ export default {
       findUsername: "",
       findPost: null,
       numPosts: 0,
+      post: null,
+      otherComment:'',
+      comments : {},
     }
   },
   computed: {
@@ -151,9 +162,10 @@ export default {
       try {
         let response = await axios.get("/api/posts");
         this.posts = response.data;
+        this.getComments();
         return true;
       } catch (error) {
-         console.log(error);
+        console.log(error);
       }
     },
     selectPost(post) {
@@ -182,6 +194,49 @@ export default {
         return true;
       } catch (error) {
          console.log(error);
+      }
+    },
+    async getComments() {
+      try {
+        for(let post of this.posts){
+          const response = await axios.get(`/api/posts/${post._id}/comments`);
+          this.comments[post._id] = response.data;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async addComment(post) {
+      try {
+        await axios.post(`/api/posts/${post._id}/comments`, {
+          username: this.username,
+          otherComment: this.otherComment,
+        });
+        this.username = "";
+        this.otherComment = "";
+        this.getComments();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async editComment(postId,commentId){
+        console.log("comment Edited ");
+      try {
+        axios.put(`/api/posts/${postId}/comments/${commentId}`, {
+          otherComment: this.otherComment,
+        });
+        this.getComments();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async deleteComment(postId, commentId) {
+        console.log("comment Deleted");
+      try {
+        await axios.delete(`/api/posts/${postId}/comments/${commentId}`);
+        this.getComments();
+      } catch (error) {
+        console.log(error);
       }
     },
   }
