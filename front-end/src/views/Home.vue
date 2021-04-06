@@ -16,7 +16,7 @@
   </div>-->
     
   <!--<UserList :users="users" />-->
-  <div class="wrapper">
+  <div class="wrapper" id="ActionItems">
     <div class="users">
       <div class="user" v-for="post in posts" :key="post.id">
         <div class="info">
@@ -30,14 +30,15 @@
         <!--<div class="commentList">-->
         <input class="commentBox" type="text" v-model="otherComment" >
         <button @click="addComment(post)" type="submit" value="Comment">Add Comment</button>
-          <h3>Comments</h3>
-        <ul>
-          <li v-for="comment in comments[post._id] " :key="comment.id">
+          <h3>Comments:</h3>
+        <div class="listItems">
+          <div v-for="comment in comments[post._id] " :key="comment.id">
               {{comment.otherComment}}
-          <button @click="deleteComment(post._id,comment._id)" type="submit" value="R">R</button>
-          <button @click="editComment(post._id,comment._id)" type="submit" value="E">E</button>
-          </li>
-        </ul>
+          <button @click="deleteComment(post._id,comment._id)" type="submit" value="R"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          <button @click="editComment(post._id,comment._id)" type="submit" value="E"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>
+          
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -133,8 +134,10 @@ export default {
   align-items: center;
   justify-content: center;
   border-radius: 5px;
+  flex-wrap: wrap;
  
 }
+
 .browseTitle{
   display: flex;
   align-items: center;
@@ -178,6 +181,33 @@ input {
 .image h2 {
   font-style: italic;
 }
+
+button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 1.2em;
+  border-radius: 5px;
+  background-color: lightgray;
+  padding: 3px;
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+button:hover{
+  background-color: #42b983;
+}
+
+.listItems{
+ text-align: right;
+ overflow: auto;
+ max-height: 200px;
+ min-height: 200px;
+ border-radius: 5px;
+ border: 2px solid #42b983;
+ margin-bottom: 10px;
+ padding-right: 20px;
+}
+
 /* Masonry */
 *,
 *:before,
@@ -270,14 +300,12 @@ input {
 }
 /* Masonry on large screens */
 @media only screen and (min-width: 1024px) {
-  .image-gallery {
-    column-count: 4;
-  }
+  
 }
 /* Masonry on medium-sized screens */
-@media only screen and (max-width: 1023px) and (min-width: 768px) {
-  .image-gallery {
-    column-count: 3;
+@media only screen and (max-width: 865px) and (min-width: 665px) {
+  .wrapper {
+    flex-direction: column;
   }
 }
 /* Masonry on small screens */
