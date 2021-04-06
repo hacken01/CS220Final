@@ -7,6 +7,7 @@
     </div>
 
     <div class="actionItems" >
+      
     <!--Add-->
         <div class="ActionBox">      
           <div class="heading">
@@ -23,15 +24,32 @@
               <textarea v-model="personComment" cols=50 rows=4 placeholder="Comment" ></textarea>
               <button @click="upload">Upload</button>
             </div>
-            <div class="upload" v-if="addPost">
+            <div>
+              
+            <!--<div class="upload" v-if="addPost">
               <h2>{{addPost.name}}</h2>
               <h2>{{addPost.username}}</h2>
               <p>{{addPost.personComment}}</p>
               <img :src="addPost.path" />
+            </div>-->
             </div>
+            
           </div>
+              <!--
+              <div class="ActionBox">      
+                <div class="heading">
+                <h2>Settings</h2>
+                </div>
+                <div class="add">
+                  <div>
+                  <h3>This is where you're login info will be</h3>
+                  </div>
+                </div>
+              </div>-->
+        
         </div>
 
+        <div class="selectEdit"> 
         <!--Edit/Delete--> 
         <div class="ActionBox"> 
           <div class="heading">
@@ -47,11 +65,14 @@
             </div>
           </div>
         </div>
+        
 
         <!--Edit/Delete--> 
         <div class="ActionBox"> 
           <div class="heading">
             <h2>Edit/Delete a Post</h2>
+          </div>
+          <div class="editBody">
             <div class="upload" v-if="findPost">
               <input v-model="findPost.username">
               <p></p>
@@ -65,6 +86,7 @@
               <button @click="deleteItem(findPost)">Delete</button>
               <button @click="editItem(findPost)">Edit</button>
             </div>
+          </div>
           </div>
         </div>
     </div>
@@ -188,10 +210,9 @@ export default {
     async editItem(post) {
       console.log("Post Edited");
       try {
-        axios.put(`/api/posts/${post._id}`, {
-          name: this.name,
-          username: this.post.username,
-          personComment: this.post.personComment,
+        axios.put("/api/posts/" + post._id, {
+          username: this.findPost.username,
+          personComment: this.findPost.personComment,
         });
         this.findPost = null;
         this.getPosts();
@@ -282,6 +303,11 @@ body{
   justify-content: center;
 }
 
+.selectEdit{
+  display: flex;
+  flex-direction: column;
+}
+
 .ActionBox{
   background: #42b983;
   align-content: flex-start;
@@ -289,11 +315,8 @@ body{
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 5px;
-  max-height: 500px;
-  min-height: 400px;
   flex-wrap: wrap;
   justify-content: center;
-  width: fit-content;
 }
 
 .listItems{
@@ -351,7 +374,7 @@ button {
 }
 
 button:hover{
-  background-color: #42b983;
+  background-color: darkgrey;
 }
 
 .selectedImage{
@@ -377,6 +400,7 @@ button:hover{
   margin-bottom: 20px;
   margin-top: 20px;
   font-size: 14px;
+  justify-content: center;
 }
 .heading h2 {
   margin-top: 8px;
@@ -388,7 +412,11 @@ button:hover{
   padding: 5px;
   margin: 5px;
   border-radius: 5px;
-  min-height: 300px;
+  text-align: center;
+}
+
+.add{
+  justify-content: center;
   text-align: center;
 }
 
@@ -433,7 +461,6 @@ button {
 }
 /* Suggestions */
 .suggestions {
-  width: 200px;
   border: 1px solid #ccc;
   background-color: white;
   text-align: center;

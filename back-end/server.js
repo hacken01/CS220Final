@@ -76,12 +76,13 @@ app.get('/api/posts', async(req, res) => {
 //edit the Post
 app.put('/api/posts/:id', async(req, res) => {
     try {
-        const Post = await Post.findOne({
+        let post = await Post.findOne({
             _id: req.params.id
         });
-        Post.personComment = req.body.personComment;
-        Post.path = req.body.path;
-        await Post.save();
+        post.username = req.body.username;
+        post.personComment = req.body.personComment;
+        //post.path = req.body.path;
+        await post.save();
         res.sendStatus(200);
     } catch (error) {
         console.log(error);
@@ -91,7 +92,7 @@ app.put('/api/posts/:id', async(req, res) => {
 //delete a post from the database*/
 app.delete('/api/posts/:id', async(req, res) => {
     try {
-        let post = await Comment.findOne({ _id: req.params.id });
+        let post = await Post.findOne({ _id: req.params.id });
         if (!post) {
             res.sendStatus(404);
             return;

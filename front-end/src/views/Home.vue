@@ -197,7 +197,7 @@ button {
 }
 
 button:hover{
-  background-color: #42b983;
+  background-color: darkgrey;
 }
 
 .listItems{
