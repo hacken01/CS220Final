@@ -34,6 +34,7 @@
         <ul>
           <li v-for="comment in comments[post._id] " :key="comment.id">
               {{comment.otherComment}}
+          <button @click="deleteComment(post._id,comment._id)" type="submit" value="R">R</button>
           </li>
         </ul>
       </div>
@@ -78,17 +79,12 @@ export default {
         for(let post of this.posts){
           const response = await axios.get(`/api/posts/${post._id}/comments`);
           this.comments[post._id] = response.data;
-          //Vue.set(this.comments,post._id,response.data); 
-           console.log(this.comments[post._id]);
         }
-       
-        console.log("comments loaded");
       } catch (error) {
         console.log(error);
       }
     },
     async addComment(post) {
-      console.log("comment Added");
       try {
         await axios.post(`/api/posts/${post._id}/comments`, {
           username: this.username,
@@ -102,6 +98,7 @@ export default {
       }
     },
     async editComment(postId,commentId){
+        console.log("comment Edited ");
       try {
         axios.put(`/api/posts/${postId}/comments/${commentId}`, {
           otherComment: this.otherComment,
@@ -112,6 +109,7 @@ export default {
       }
     },
     async deleteComment(postId, commentId) {
+        console.log("comment Deleted");
       try {
         await axios.delete(`/api/posts/${postId}/comments/${commentId}`);
         this.getComments();
