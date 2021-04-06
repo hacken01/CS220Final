@@ -389,6 +389,21 @@ button:hover{
   text-align: center;
 }
 
+.selectedImage::-webkit-scrollbar {
+    width: 15px;
+    height: auto;
+}
+
+.selectedImage::-webkit-scrollbar-track {
+    background-color:lightgrey;
+    border-radius: 5px;
+}
+
+.selectedImage::-webkit-scrollbar-thumb {
+  background-color: darkgray;
+  border-radius: 5px;
+}
+
 h1{
   color: #42b983;
   text-align: center;
@@ -453,6 +468,7 @@ button {
 
 .users::-webkit-scrollbar-track {
     background-color:lightgrey;
+    border-radius: 5px;
 }
 
 .users::-webkit-scrollbar-thumb {
