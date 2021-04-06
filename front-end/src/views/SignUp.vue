@@ -8,7 +8,7 @@
                 <p class="sign-up-header">Sign Up Today!</p>
             </div>
             <div class="sign-up_form">
-                <form action="/action_page.php">
+                <form>
                     <label for="fname">First Name</label>
                     <input type="text" id="fname" name="firstname" placeholder="Your name..">
                     <br>

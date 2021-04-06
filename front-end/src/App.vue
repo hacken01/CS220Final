@@ -1,15 +1,11 @@
 <template>
   <div id="app">
-  <font-awesome-icon icon="spinner" />
   <div id="menu">
     <div id="leftSide">
       <router-link to="/">
         <h1>Twitcherest</h1>
       </router-link>
     </div>    
-    <div id="middle">
-    
-    </div>
     <div id="rightSide">
         <router-link to="/">Lobby</router-link>
         <router-link to="/MyStuff">My Stuff</router-link>
@@ -95,22 +91,14 @@
   text-decoration: none;
 }
 
-#middle {
-  grid-area: brand;
-  display: flex;
-  justify-content: center;
-}
-
-#middle img {
-  height: 200px;
-}
 
 #rightSide {
   grid-area: side;
   display: flex;
   justify-content: flex-end;
+  margin-bottom: auto;
   margin-top: auto;
-  
+  width: auto;
 }
 
 #rightSide a{
@@ -120,7 +108,7 @@
 
 .menu-item {
   display: flex;
-  flex-direction: column;
+  flex-direction: s;
 }
 
 .wrapper {
