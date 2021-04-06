@@ -46,7 +46,6 @@ app.post('/api/photos', upload.single('photo'), async (req, res) => {
         path: "/images/" + req.file.filename
     });
 });
-
 // Create a new Post for the user
 app.post('/api/posts', async (req, res) => {
     const post = new Post({
@@ -64,7 +63,6 @@ app.post('/api/posts', async (req, res) => {
         res.sendStatus(500);
     }
 });
-
 // Get a list of all of the Posts
 app.get('/api/posts', async (req, res) => {
     try {
@@ -75,7 +73,36 @@ app.get('/api/posts', async (req, res) => {
         res.sendStatus(500);
     }
 });
-
+//edit the Post
+app.put('/api/posts/:id', async (req, res) => {
+    try {
+        const Post = await Post.findOne({
+            _id: req.params.id
+        });
+        Post.personComment = req.body.personComment;
+        Post.path = req.body.path;
+        await Post.save();
+        res.sendStatus(200);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+});
+//delete a post from the database
+app.delete('/api/posts/:id', async (req, res) => {
+    try {
+        let post = await Comment.findOne({ _id: req.params.id });
+        if (!post) {
+            res.sendStatus(404);
+            return;
+        }
+        await post.delete();
+        res.sendStatus(200);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+});
 // Schema for comments
 const commentSchema = new mongoose.Schema({
     post: {
@@ -85,10 +112,8 @@ const commentSchema = new mongoose.Schema({
     username: String,
     otherComment: String,
 })
-
 //Model for comments
 const Comment = mongoose.model('Comment', commentSchema);
-
 // Create a new Comment to post
 app.post('/api/posts/:postID/comments', async (req, res) => {
     try {
@@ -111,7 +136,6 @@ app.post('/api/posts/:postID/comments', async (req, res) => {
         res.sendStatus(500);
     }
 });
-
 // get the list of all the comments
 app.get('/api/posts/:postID/comments', async (req, res) => {
     try {
@@ -127,7 +151,6 @@ app.get('/api/posts/:postID/comments', async (req, res) => {
         res.sendStatus(500);
     }
 });
-
 //function to update the comments 
 app.put('/api/posts/:postID/comments/:commentID', async (req, res) => {
     try {
@@ -145,9 +168,7 @@ app.put('/api/posts/:postID/comments/:commentID', async (req, res) => {
         res.sendStatus(500);
     }
 });
-
-
-//delete the Post from the database
+//delete the Comment from the database
 app.delete('/api/posts/:postID/comments/:commentID', async (req, res) => {
     try {
         let comment = await Comment.findOne({ _id: req.params.commentID, post: req.params.postID });
@@ -162,21 +183,5 @@ app.delete('/api/posts/:postID/comments/:commentID', async (req, res) => {
         res.sendStatus(500);
     }
 });
-
-/*//edit the Post
-app.put('/api/Posts/:id', async(req, res) => {
-    try {
-        const Post = await Post.findOne({
-            _id: req.params.id
-        });
-        Post.description = req.body.description;
-        Post.topic = req.body.topic;
-        await Post.save();
-        res.sendStatus(200);
-    } catch (error) {
-        console.log(error);
-        res.sendStatus(500);
-    }
-});*/
 
 app.listen(4000, () => console.log('Server listening on port 4000!'));
