@@ -6,11 +6,11 @@
       </div>      
     </div>
 
-    <div class="wrapper">
+    <div class="actionItems" >
     <!--Add-->
         <div class="ActionBox">      
           <div class="heading">
-          <h2>Add an Item</h2>
+          <h2>Add a Post</h2>
           </div>
           <div class="add">
             <div class="form">
@@ -62,8 +62,8 @@
               <textarea v-model="findPost.personComment" cols=50 rows=4 placeholder="Comment" ></textarea>
             </div>
             <div class="actions" v-if="findPost">
-              <button @click="deleteItem(findPost)">Delete Post</button>
-              <button @click="editItem(findPost)">Edit Post</button>
+              <button @click="deleteItem(findPost)">Delete</button>
+              <button @click="editItem(findPost)">Edit</button>
             </div>
           </div>
         </div>
@@ -85,13 +85,13 @@
         <input class="commentBox" type="text" v-model="otherComment" >
         <button @click="addComment(post)" type="submit" value="Comment">Add Comment</button>
           <h3>Comments:</h3>
-        <ul>
-          <li v-for="comment in comments[post._id] " :key="comment.id">
+        <div class="listItems">
+          <div v-for="comment in comments[post._id] " :key="comment.id">
               {{comment.otherComment}}
-          <button @click="deleteComment(post._id,comment._id)" type="submit" value="R">R</button>
-          <button @click="editComment(post._id,comment._id)" type="submit" value="E">E</button>
-          </li>
-        </ul>
+          <button @click="deleteComment(post._id,comment._id)" type="submit" value="R"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          <button @click="editComment(post._id,comment._id)" type="submit" value="E"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>
+          </div>
+        </div>
           </div>
         </div>
       </div>
@@ -176,7 +176,7 @@ export default {
     async deleteItem(post) {
       try {
         await axios.delete("/api/posts/" + post._id);
-        //this.findPost = null;
+        this.findPost = null;
         this.getPosts();
         return true;
       } catch (error) {
@@ -184,11 +184,12 @@ export default {
       }
     },
     async editItem(post) {
+      console.log("Post Edited");
       try {
-        await axios.put("/api/posts/" + post._id, {
+        axios.put(`/api/posts/${post._id}`, {
           name: this.name,
-          username: this.findPost.username,
-          personComment: this.findPost.personComment,
+          username: this.post.username,
+          personComment: this.post.personComment,
         });
         this.findPost = null;
         this.getPosts();
@@ -245,6 +246,7 @@ export default {
 </script>
 
 <style>
+/*GENERAL CSS*/
 body{
   background: #3c3c42;
 }
@@ -269,16 +271,51 @@ body{
   margin-bottom: 20px;
 }
 
+.actionItems{
+  height: fit-content;
+  width: fit-content;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .ActionBox{
   background: #42b983;
   align-content: flex-start;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 10px;
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 5px;
   max-height: 500px;
   min-height: 400px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: fit-content;
+}
+
+.listItems{
+ text-align: right;
+ overflow: auto;
+ max-height: 200px;
+ min-height: 200px;
+ border-radius: 5px;
+ border: 2px solid #42b983;
+ margin-bottom: 10px;
+ padding-right: 20px;
+}
+
+.listItems::-webkit-scrollbar {
+    width: 1em;
+    height: auto;
+}
+
+.listItems::-webkit-scrollbar-track {
+    background-color:lightgrey;
+}
+
+.listItems::-webkit-scrollbar-thumb {
+  background-color: #42b983;
+  border-radius: 5px;
 }
 
 input {
@@ -304,6 +341,14 @@ button {
   margin-bottom: 20px;
   font-size: 1.2em;
   border-radius: 5px;
+  background-color: lightgray;
+  padding: 3px;
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+button:hover{
+  background-color: #42b983;
 }
 
 .selectedImage{
@@ -328,6 +373,7 @@ button {
   display: flex;
   margin-bottom: 20px;
   margin-top: 20px;
+  font-size: 14px;
 }
 .heading h2 {
   margin-top: 8px;
@@ -336,21 +382,11 @@ button {
 .add,
 .edit {
   display: flex;
-  background: white;
   padding: 5px;
   margin: 5px;
   border-radius: 5px;
   min-height: 300px;
   text-align: center;
-}
-.circle {
-  border-radius: 50%;
-  width: 18px;
-  height: 18px;
-  padding: 8px;
-  background: #333;
-  color: #fff;
-  text-align: center
 }
 
 h1{
@@ -368,6 +404,7 @@ button {
 }
 .form {
   margin-right: 0px;
+  
 }
 /* Uploaded images */
 .upload h2 {
@@ -380,6 +417,8 @@ button {
 .suggestions {
   width: 200px;
   border: 1px solid #ccc;
+  background-color: white;
+  text-align: center;
 }
 .suggestion {
   min-height: 20px;
@@ -405,7 +444,20 @@ button {
   overflow-y:auto;
   height: 400px;
   width: 65%;
+}
 
+.users::-webkit-scrollbar {
+    width: 15px;
+    height: auto;
+}
+
+.users::-webkit-scrollbar-track {
+    background-color:lightgrey;
+}
+
+.users::-webkit-scrollbar-thumb {
+  background-color: #42b983;
+  border-radius: 5px;
 }
 
 .user {
@@ -445,5 +497,16 @@ button {
   height: 80px;
   margin-bottom: 20px;
 }
-
+/* Masonry on large screens */
+@media only screen and (min-width: 1024px) {
+  
+}
+/* Masonry on medium-sized screens */
+@media only screen and (max-width: 865px) and (min-width: 665px) {
+  
+}
+/* Masonry on small screens */
+@media only screen and (max-width: 767px) and (min-width: 540px) {
+  
+}
 </style>
