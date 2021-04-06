@@ -30,13 +30,14 @@
         </div>
         <p>{{post.personComment}}</p>
         <!--<div class="commentList">-->
-        <input   class="commentBox" type="text" v-model="otherComment">
+        <input class="commentBox" type="text" v-bind="otherComment" >
         <button @click="addComment(post)" type="submit" value="Comment">Add Comment</button>
         
           <h3>Comments:</h3>
         <ul>
           <li v-for="comment in comments[post._id] " :key="comment.id">
               {{comment.otherComment}}
+
           </li>
         </ul>
         
