@@ -37,7 +37,7 @@ const postSchema = new mongoose.Schema({
 const Post = mongoose.model('Post', postSchema);
 // Upload a photo. Uses the multer middleware for the upload and then returns
 // the path where the photo is stored in the file system.
-app.post('/api/photos', upload.single('photo'), async (req, res) => {
+app.post('/api/photos', upload.single('photo'), async(req, res) => {
     // Just a safety check
     if (!req.file) {
         return res.sendStatus(400);
@@ -47,7 +47,7 @@ app.post('/api/photos', upload.single('photo'), async (req, res) => {
     });
 });
 // Create a new Post for the user
-app.post('/api/posts', async (req, res) => {
+app.post('/api/posts', async(req, res) => {
     const post = new Post({
         name: req.body.name,
         username: req.body.username,
@@ -64,7 +64,7 @@ app.post('/api/posts', async (req, res) => {
     }
 });
 // Get a list of all of the Posts
-app.get('/api/posts', async (req, res) => {
+app.get('/api/posts', async(req, res) => {
     try {
         let posts = await Post.find(); // find returns all the posts
         res.send(posts);
@@ -74,7 +74,7 @@ app.get('/api/posts', async (req, res) => {
     }
 });
 //edit the Post
-app.put('/api/posts/:id', async (req, res) => {
+app.put('/api/posts/:id', async(req, res) => {
     try {
         const Post = await Post.findOne({
             _id: req.params.id
@@ -88,8 +88,8 @@ app.put('/api/posts/:id', async (req, res) => {
         res.sendStatus(500);
     }
 });
-//delete a post from the database
-app.delete('/api/posts/:id', async (req, res) => {
+//delete a post from the database*/
+app.delete('/api/posts/:id', async(req, res) => {
     try {
         let post = await Comment.findOne({ _id: req.params.id });
         if (!post) {
@@ -105,17 +105,17 @@ app.delete('/api/posts/:id', async (req, res) => {
 });
 // Schema for comments
 const commentSchema = new mongoose.Schema({
-    post: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Post' // commentSchema belongs to a Post 
-    },
-    username: String,
-    otherComment: String,
-})
-//Model for comments
+        post: {
+            type: mongoose.Schema.ObjectId,
+            ref: 'Post' // commentSchema belongs to a Post 
+        },
+        username: String,
+        otherComment: String,
+    })
+    //Model for comments
 const Comment = mongoose.model('Comment', commentSchema);
 // Create a new Comment to post
-app.post('/api/posts/:postID/comments', async (req, res) => {
+app.post('/api/posts/:postID/comments', async(req, res) => {
     try {
         let post = await Post.findOne({ _id: req.params.postID });
         if (!post) {
@@ -137,7 +137,7 @@ app.post('/api/posts/:postID/comments', async (req, res) => {
     }
 });
 // get the list of all the comments
-app.get('/api/posts/:postID/comments', async (req, res) => {
+app.get('/api/posts/:postID/comments', async(req, res) => {
     try {
         let post = await Post.findOne({ _id: req.params.postID });
         if (!post) {
@@ -152,7 +152,7 @@ app.get('/api/posts/:postID/comments', async (req, res) => {
     }
 });
 //function to update the comments 
-app.put('/api/posts/:postID/comments/:commentID', async (req, res) => {
+app.put('/api/posts/:postID/comments/:commentID', async(req, res) => {
     try {
         let comment = await Comment.findOne({ _id: req.params.commentID, post: req.params.postID });
         if (!comment) {
@@ -169,7 +169,7 @@ app.put('/api/posts/:postID/comments/:commentID', async (req, res) => {
     }
 });
 //delete the Comment from the database
-app.delete('/api/posts/:postID/comments/:commentID', async (req, res) => {
+app.delete('/api/posts/:postID/comments/:commentID', async(req, res) => {
     try {
         let comment = await Comment.findOne({ _id: req.params.commentID, post: req.params.postID });
         if (!comment) {

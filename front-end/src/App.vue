@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <template>
   <div id="app">
+  <font-awesome-icon icon="spinner" />
   <div id="menu">
     <div id="leftSide">
       <router-link to="/">
@@ -41,8 +42,9 @@
 }
 
 #rightSide {
-  padding: 30px;
+  padding: auto;
   text-align: right;
+  width: auto;
 }
 
 #rightSide a:hover{
