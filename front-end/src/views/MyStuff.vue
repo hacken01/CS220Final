@@ -100,6 +100,7 @@
 
 <script>
 import axios from 'axios'; // to use the back end API
+import Vue from 'vue';
 export default {
   name: 'User',
   
@@ -134,6 +135,7 @@ export default {
   },
   created() {
     this.getPosts();
+    this.getComments();
   },
   methods: {
     fileChanged(event) {
@@ -202,7 +204,8 @@ export default {
       try {
         for(let post of this.posts){
           const response = await axios.get(`/api/posts/${post._id}/comments`);
-          this.comments[post._id] = response.data;
+          // use vue.set to make it reactive 
+          Vue.set(this.comments,post._id,response.data); 
         }
       } catch (error) {
         console.log(error);
