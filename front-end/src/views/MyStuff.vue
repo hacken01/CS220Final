@@ -372,6 +372,7 @@ button:hover{
   display: flex;
   margin-bottom: 20px;
   margin-top: 20px;
+  font-size: 14px;
 }
 .heading h2 {
   margin-top: 8px;

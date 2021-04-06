@@ -31,8 +31,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  background: black;
+  color: rgb(30, 30, 30);
+  background: rgb(30, 30, 30);
   margin: -10px;
 }
 
