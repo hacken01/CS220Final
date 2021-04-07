@@ -84,7 +84,7 @@
             </div>
             <div class="actions" v-if="findPost">
               <button @click="deletePost(findPost)">Delete</button>
-              <button @click="editIPost(findPost)">Edit</button>
+              <button @click="editPost(findPost)">Edit</button>
             </div>
           </div>
           </div>
@@ -96,15 +96,16 @@
         <div class="users">
           <div class="user" v-for="post in posts" :key="post.id">
             <div class="info">
-              <h2>{{post.name}}</h2>
-              <h2>{{post.username}}</h2>
+              <h3 class="name">{{post.name}}</h3>
+              <h3>{{post.username}}</h3>
             </div>
             <div class="image">
               <img :src="post.path" />
             </div>
             <p>{{post.personComment}}</p>
             <!--<div class="commentList">-->
-        <input class="commentBox" type="text" v-model="otherComment" >
+        
+        <input class="commentBoxArea" type="text" placeholder="Comment Here..." v-model="otherComment" >
         <button @click="addComment(post)" type="submit" value="Comment">Add Comment</button>
           <h3>Comments:</h3>
         <div class="listItems">
@@ -223,7 +224,7 @@ export default {
         console.log(error);
       }
     },
-    async deleteItem(post) {
+    async deletePost(post) {
       try {
         await axios.delete("/api/posts/" + post._id);
         this.findPost = null;
@@ -233,7 +234,7 @@ export default {
          console.log(error);
       }
     },
-    async editItem(post) {
+    async editPost(post) {
       console.log("Post Edited");
       try {
         axios.put("/api/posts/" + post._id, {
@@ -321,6 +322,10 @@ body{
   justify-content: center;
 }
 
+.name{
+  font-size: 25px;
+}
+
 .listItems{
  text-align: right;
  overflow: auto;
@@ -384,9 +389,17 @@ button:hover{
   max-height: 200px;
 }
 
-#CommentBox {
+#commentBoxArea{
+  background-color: lightgray !important;
+  margin: 0;
+  padding: 0px;
+  padding-left: 10px;
+}
+
+.commentBox {
   margin-top: 20px;
   margin-bottom: 20px;
+  border: 2px solid #42b983;
 }
 
 .currComment{
@@ -549,7 +562,7 @@ h2{
   color: #000;
   padding: 10px;
   height: 100px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 /* Masonry on large screens */
 @media only screen and (min-width: 1024px) {

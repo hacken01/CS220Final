@@ -20,15 +20,15 @@
     <div class="users">
       <div class="user" v-for="post in posts" :key="post.id">
         <div class="info">
-        <h2>{{post.name}}</h2>
-        <h2>{{post.username}}</h2> 
+        <h3 class="name">{{post.name}}</h3>
+        <h3>{{post.username}}</h3> 
         </div>
         <div class="image">
         <img :src="post.path" />
         </div>
         <p>{{post.personComment}}</p>
         <!--<div class="commentList">-->
-        <input class="commentBox" type="text" v-model="otherComment" >
+        <input class="commentBoxArea" type="text" placeholder="Comment Here..." v-model="otherComment" >
         <button @click="addComment(post)" type="submit" value="Comment">Add Comment</button>
           <h3>Comments:</h3>
         <div class="listItems">
@@ -139,6 +139,9 @@ export default {
   border-radius: 5px;
   flex-wrap: wrap;
  
+}
+.name{
+  font-size: 25px;
 }
 
 .browseTitle{
