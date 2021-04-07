@@ -186,6 +186,7 @@ export default {
     async getPosts() {
       try {
         let response = await axios.get("/api/posts");
+        Vue.set(this.posts, response.data);
         this.posts = response.data;
         this.getComments();
         return true;
@@ -196,30 +197,6 @@ export default {
     selectPost(post) {
       this.findUsername = "";
       this.findPost = post;
-    },
-    async deleteItem(post) {
-      try {
-        await axios.delete("/api/posts/" + post._id);
-        this.findPost = null;
-        this.getPosts();
-        return true;
-      } catch (error) {
-         console.log(error);
-      }
-    },
-    async editItem(post) {
-      console.log("Post Edited");
-      try {
-        axios.put("/api/posts/" + post._id, {
-          username: this.findPost.username,
-          personComment: this.findPost.personComment,
-        });
-        this.findPost = null;
-        this.getPosts();
-        return true;
-      } catch (error) {
-         console.log(error);
-      }
     },
     async getComments() {
       try {
@@ -243,6 +220,30 @@ export default {
         this.getComments();
       } catch (error) {
         console.log(error);
+      }
+    },
+    async deleteItem(post) {
+      try {
+        await axios.delete("/api/posts/" + post._id);
+        this.findPost = null;
+        this.getPosts();
+        return true;
+      } catch (error) {
+         console.log(error);
+      }
+    },
+    async editItem(post) {
+      console.log("Post Edited");
+      try {
+        axios.put("/api/posts/" + post._id, {
+          username: this.findPost.username,
+          personComment: this.findPost.personComment,
+        });
+        this.findPost = null;
+        this.getPosts();
+        return true;
+      } catch (error) {
+         console.log(error);
       }
     },
     async editComment(postId,commentId){
@@ -458,6 +459,10 @@ button {
 }
 .upload img {
   max-width: 300px;
+}
+
+h2{
+  font-size: 14px;
 }
 /* Suggestions */
 .suggestions {
