@@ -541,8 +541,8 @@ button {
   background-color: white;
   color: #000;
   padding: 10px;
-  height: 80px;
-  margin-bottom: 20px;
+  height: 100px;
+  margin-bottom: 30px;
 }
 /* Masonry on large screens */
 @media only screen and (min-width: 1024px) {
