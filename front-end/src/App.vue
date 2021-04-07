@@ -8,7 +8,7 @@
     </div>    
     <div id="rightSide">
         <router-link to="/">Lobby</router-link>
-        <router-link to="/MyStuff">My Stuff</router-link>
+        <router-link to="/Container">Container</router-link>
         <router-link to="/SignUp">Sign Up</router-link>
         <router-link to="/about">About</router-link>
     </div>
