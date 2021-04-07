@@ -83,8 +83,8 @@
               <textarea v-model="findPost.personComment" cols=50 rows=4 placeholder="Comment" ></textarea>
             </div>
             <div class="actions" v-if="findPost">
-              <button @click="deleteItem(findPost)">Delete</button>
-              <button @click="editItem(findPost)">Edit</button>
+              <button @click="deletePost(findPost)">Delete</button>
+              <button @click="editIPost(findPost)">Edit</button>
             </div>
           </div>
           </div>
@@ -179,6 +179,7 @@ export default {
         this.username = "";
         this.personComment = "";
         this.file = null;
+        this.getPosts();
       } catch (error) {
          console.log(error);
       }
@@ -402,10 +403,12 @@ button:hover{
   margin-top: 20px;
   font-size: 14px;
   justify-content: center;
+  
 }
 .heading h2 {
   margin-top: 8px;
   margin-left: 10px;
+  font-size: 20px;
 }
 .add,
 .edit {
@@ -545,8 +548,8 @@ h2{
   background-color: white;
   color: #000;
   padding: 10px;
-  height: 80px;
-  margin-bottom: 20px;
+  height: 100px;
+  margin-bottom: 30px;
 }
 /* Masonry on large screens */
 @media only screen and (min-width: 1024px) {
