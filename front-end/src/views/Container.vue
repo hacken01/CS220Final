@@ -564,16 +564,29 @@ h2{
   height: 100px;
   margin-bottom: 20px;
 }
-/* Masonry on large screens */
-@media only screen and (min-width: 1024px) {
-  
-}
-/* Masonry on medium-sized screens */
-@media only screen and (max-width: 865px) and (min-width: 665px) {
-  
-}
 /* Masonry on small screens */
-@media only screen and (max-width: 767px) and (min-width: 540px) {
-  
+@media only screen and (max-width: 650px){
+  .user{
+    margin: 10px;
+    margin-top: 40px;
+    width: 200px;
+    background-color: white;
+    border: 15px solid #42b983;
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .image{
+    width: fit-content;
+    padding: 0px;
+  }
+  .user img{
+    height: 125px;
+    width: 150px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    padding-top: 15px;
+    margin: 0px;
+}
 }
 </style>

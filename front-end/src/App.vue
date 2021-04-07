@@ -140,4 +140,23 @@ input {
 .footer a:visited {
   color: #42b983;
 }
+/* Masonry on small screens */
+@media only screen and (max-width: 650px){
+  
+  #menu a {
+  font-size: small;
+  font-weight: bold;
+  color: #42b983;
+  text-decoration: none;
+}
+  #rightside{
+    font-size: 8px;
+  }
+  #menu{
+    flex-direction: column;
+  }
+  h1{
+    font-size: 15px;
+  }
+}
 </style>

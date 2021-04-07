@@ -75,7 +75,7 @@ export default {
         this.getComments();
         return true;
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     },
     async getComments() {
@@ -86,7 +86,7 @@ export default {
           Vue.set(this.comments,post._id,response.data); 
         }
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     },
     async addComment(post) {
@@ -99,27 +99,27 @@ export default {
         this.otherComment = "";
         this.getComments();
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     },
     async editComment(postId,commentId){
-        console.log("comment Edited ");
+        //console.log("comment Edited ");
       try {
         axios.put(`/api/posts/${postId}/comments/${commentId}`, {
           otherComment: this.otherComment,
         });
         this.getComments();
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     },
     async deleteComment(postId, commentId) {
-        console.log("comment Deleted");
+        //console.log("comment Deleted");
       try {
         await axios.delete(`/api/posts/${postId}/comments/${commentId}`);
         this.getComments();
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     },
   }
@@ -304,20 +304,29 @@ button:hover{
   text-align: left;
   padding-left: 5px;
 }
-/* Masonry on large screens */
-@media only screen and (min-width: 1024px) {
-  
-}
-/* Masonry on medium-sized screens */
-@media only screen and (max-width: 865px) and (min-width: 665px) {
-  .wrapper {
-    flex-direction: column;
-  }
-}
 /* Masonry on small screens */
-@media only screen and (max-width: 767px) and (min-width: 540px) {
-  .image-gallery {
-    column-count: 2;
+@media only screen and (max-width: 650px){
+  .user{
+    margin: 10px;
+    margin-top: 40px;
+    width: 200px;
+    background-color: white;
+    border: 15px solid #42b983;
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
+  .image{
+    width: fit-content;
+    padding: 0px;
+  }
+  .user img[data-v-fae5bece] {
+    height: 125px;
+    width: 150px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    padding-top: 15px;
+    margin: 0px;
+}
 }
 </style>
