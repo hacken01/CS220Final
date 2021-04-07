@@ -179,6 +179,7 @@ export default {
         this.username = "";
         this.personComment = "";
         this.file = null;
+        this.getPosts();
       } catch (error) {
          console.log(error);
       }
