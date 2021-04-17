@@ -8,8 +8,7 @@
     </div>    
     <div id="rightSide">
         <router-link to="/">Lobby</router-link>
-        <router-link to="/Container">My Page</router-link>
-        <router-link to="/SignUp">Sign Up</router-link>
+        <router-link to="/dashboard">My Page</router-link>
         <router-link to="/about">About</router-link>
     </div>
   </div>
@@ -159,4 +158,6 @@ input {
     font-size: 15px;
   }
 }
+
+
 </style>

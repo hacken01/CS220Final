@@ -1,4 +1,4 @@
-# cp4-twitch-erest
+# front-end
 
 ## Project setup
 ```

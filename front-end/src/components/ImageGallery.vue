@@ -1,0 +1,104 @@
+<template>
+<div>
+  <section class="image-gallery">
+    <div class="image" v-for="post in posts" v-bind:key="post._id">
+      <router-link :to="{ name: 'post', params: { id: post._id}}"><img :src="post.path" /></router-link>
+      <div class="postInfo">
+        <p class="postTitle">{{post.title}}</p>
+        <p class="postName">{{post.user.firstName}} {{post.user.lastName}}</p>
+      </div>
+      <p class="postDate">{{formatDate(post.created)}}</p>
+    </div>
+  </section>
+</div>
+</template>
+
+<script>
+import moment from 'moment';
+export default {
+  name: 'ImageGallery',
+  props: {
+    posts: Array
+  },
+  methods: {
+    formatDate(date) {
+      if (moment(date).diff(Date.now(), 'days') < 15)
+        return moment(date).fromNow();
+      else
+        return moment(date).format('d MMMM YYYY');
+    }
+  }
+}
+</script>
+
+<style scoped>
+.postInfo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8em;
+}
+
+.postInfo p {
+  margin: 0px;
+  padding: 5px;
+}
+
+.postDate {
+  font-size: 0.7em;
+  font-weight: normal;
+  padding: 5px;
+}
+
+p {
+  margin: 0px;
+}
+
+/* Masonry */
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.image-gallery {
+  column-gap: 1em;
+}
+
+.image {
+  margin: 0 0 1.5em;
+  display: inline-block;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.image img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.image:hover{
+  box-shadow:  2px 2px 2px 2px lightgray;
+  border-radius: 5px;
+}
+
+/* Masonry on large screens */
+@media only screen and (min-width: 1024px) {
+  .image-gallery {
+    column-count: 4;
+  }
+}
+
+/* Masonry on medium-sized screens */
+@media only screen and (max-width: 1023px) and (min-width: 768px) {
+  .image-gallery {
+    column-count: 3;
+  }
+}
+
+/* Masonry on small screens */
+@media only screen and (max-width: 767px) and (min-width: 540px) {
+  .image-gallery {
+    column-count: 2;
+  }
+}
+</style>
