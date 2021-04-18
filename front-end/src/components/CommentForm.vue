@@ -1,31 +1,31 @@
 <template>
 <div class="post">
     <div class="commentForm">
-        <div>
-            <button @click="setCreating" class="pure-button button-xsmall">
-                <legend>Leave a Comment:</legend>
-            </button>
-            </div>
-            <form class="pure-form" v-if="creating" @submit.prevent="addComment">
-            
-            <fieldset>
-                <textarea v-model="comment"></textarea><!--ISSUE WITH COMMENT Method??-->
-                <br />
-                <button @click="cancelCreating" class="pure-button space-right">Cancel</button>
-                <button class="pure-button pure-button-primary" type="submit">Submit</button>
-            </fieldset>
-            </form>
-        </div>
+      <div>
+      <button @click="setCreating" class="pure-button button-xsmall">
+          <legend>Leave a Comment:</legend>
+      </button>
+      </div>
 
-        <div class="comments" v-for="comment in comments" v-bind:key="comment.id">
-            <div class="commentInfo">
-                <div class="comment">
-                <p>{{comment.comment}} -- Posted {{formatDate(comment.created)}} by {{comment.user.username}}</p> <!--UNABLE TO CALL .user.username-->
-                </div>
+      <form class="pure-form" v-if="creating" @submit.prevent="addComment">
+      
+      <fieldset>
+          <textarea v-model="comment"></textarea><!--ISSUE WITH COMMENT Method??-->
+          <br />
+          <button @click="cancelCreating" class="pure-button space-right">Cancel</button>
+          <button class="pure-button pure-button-primary" type="submit">Submit</button>
+      </fieldset>
+      </form>
+    </div>
+
+    <div class="comments" v-for="comment in comments" v-bind:key="comment.id">
+        <div class="commentInfo">
+            <div class="comment">
+              <p>{{comment.comment}} -- Posted {{formatDate(comment.created)}} by {{comment.user.username}}</p> <!--UNABLE TO CALL .user.username-->
             </div>
         </div>
-    
     </div>
+  </div>
 </template>
 
 <script>

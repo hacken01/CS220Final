@@ -8,12 +8,24 @@
         <p class="postName">{{post.user.firstName}} {{post.user.lastName}}</p>
       </div>
       <p class="postDate">{{formatDate(post.created)}}</p>
+      <div class="comments" v-for="comment in comments" v-bind:key="comment.id">
+            <div class="comment">
+                <div class="comment">
+                <h3>Time: {{time(comment.created)}}</h3>
+                <p>{{comment.comment}}</p>
+                </div>
+            </div>
+        </div>
     </div>
+
+    
+
   </section>
 </div>
 </template>
 
 <script>
+//import axios from 'axios';
 import moment from 'moment';
 export default {
   name: 'ImageGallery',
@@ -27,8 +39,7 @@ export default {
       else
         return moment(date).format('d MMMM YYYY');
     }
-  }
-}
+  },}
 </script>
 
 <style scoped>
@@ -36,17 +47,20 @@ export default {
   display: flex;
   justify-content: space-between;
   font-size: 0.8em;
+  color: #3c3c42;
 }
 
 .postInfo p {
   margin: 0px;
   padding: 5px;
+  color: #3c3c42;
 }
 
 .postDate {
   font-size: 0.7em;
   font-weight: normal;
   padding: 5px;
+  color: #3c3c42;
 }
 
 p {
@@ -62,6 +76,9 @@ p {
 
 .image-gallery {
   column-gap: 1em;
+  margin-left:2%;
+  margin-right:2%;
+  justify-content: center;
 }
 
 .image {
@@ -69,6 +86,10 @@ p {
   display: inline-block;
   width: 100%;
   border-radius: 5px;
+  background-color: white;
+  padding: 5px;
+  border: 5px solid white;
+
 }
 
 .image img {
@@ -77,7 +98,7 @@ p {
 }
 
 .image:hover{
-  box-shadow:  2px 2px 2px 2px lightgray;
+  border: 5px solid #42b983;
   border-radius: 5px;
 }
 
