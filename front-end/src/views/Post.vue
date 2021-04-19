@@ -155,7 +155,7 @@ export default {
   justify-content: center;
   width: 100%;
   text-align: center;
-  color: white;
+  color: gray;
 }
 
 textarea {
@@ -173,6 +173,11 @@ textarea {
 .imageBlock {
   background-color: white;
   border-radius: 5px;
+  padding-bottom: 5px;
+}
+
+.commentForm {
+  margin-top: 5px;
 }
 
 label {
@@ -186,6 +191,10 @@ label {
 
 .post img {
   width: 60%;
+}
+
+button {
+  background-color: #42b983;
 }
 
 img{

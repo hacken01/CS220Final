@@ -183,6 +183,11 @@ img{
     width: 200px;
 }
 
+.pure-button-primary, .pure-button-selected, a.pure-button-primary, a.pure-button-selected {
+  background-color: #42b983;
+}
+
+
 /* Masonry on large screens */
 @media only screen and (min-width: 1024px) {
   .post img {
