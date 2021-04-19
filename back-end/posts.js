@@ -46,7 +46,7 @@ const postSchema = new mongoose.Schema({
 const Post = mongoose.model('Post', postSchema);
 
 // upload post
-router.post("/", validUser, upload.single('post'), async(req, res) => {
+router.post("/", validUser, upload.single('post'), async (req, res) => {
     // check parameters
     if (!req.file)
         return res.status(400).send({
@@ -60,6 +60,7 @@ router.post("/", validUser, upload.single('post'), async(req, res) => {
         description: req.body.description,
     });
     try {
+        console.log("post Post was called");
         await post.save();
         return res.sendStatus(200);
     } catch (error) {
@@ -69,9 +70,10 @@ router.post("/", validUser, upload.single('post'), async(req, res) => {
 });
 
 // get my posts
-router.get("/", validUser, async(req, res) => {
+router.get("/", validUser, async (req, res) => {
     // return posts
     try {
+        console.log("Get User owned Post was called");
         let posts = await Post.find({
             user: req.user
         }).sort({
@@ -85,8 +87,9 @@ router.get("/", validUser, async(req, res) => {
 });
 
 // get all posts
-router.get("/all", async(req, res) => {
+router.get("/all", async (req, res) => {
     try {
+        console.log("Get All Post was called");
         let posts = await Post.find().sort({
             created: -1
         }).populate('user');
@@ -98,9 +101,9 @@ router.get("/all", async(req, res) => {
 });
 
 // get a single post
-router.get("/:id", async(req, res) => {
+router.get("/:id", async (req, res) => {
     try {
-        console.log("Get Post was called");
+        console.log("Get Single Post was called");
         let post = await Post.findOne({ _id: req.params.id }).populate('user');
         return res.send(post);
     } catch (error) {

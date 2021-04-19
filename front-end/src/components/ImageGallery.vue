@@ -79,8 +79,10 @@ export default {
     },
     async getPost() {
       try {
+        if(this.$route.params.id != null){
         let response = await axios.get("/api/posts/"+this.$route.params.id);
         this.post = response.data;
+        }
         console.log(this.post);
       } catch (error) {
         this.error = error.response.data.message;

@@ -65,17 +65,21 @@ export default {
   methods: {
     async getPosts() {
       try {
+        if(this.$route.params.id != null){
         let response = await axios.get("/api/posts/all");
         this.posts = response.data;
+        }
       } catch (error) {
         this.error = error.response.data.message;
       }
     },
     async getPost() {
       try {
+        if(this.$route.params.id != null){
         let response = await axios.get("/api/posts/"+this.$route.params.id);
         this.post = response.data;
         console.log(this.post);
+        }
       } catch (error) {
         this.error = error.response.data.message;
       }
@@ -96,9 +100,12 @@ export default {
     },
     async getComments() {
       try {
+        console.log("Comment Form " + this.$route.params.id);
+        if(this.$route.params.id != null){
         let response = await axios.get("/api/comments/"+this.$route.params.id); //DO I NEED TO FILTER BY PHOTO HERE?
         this.comments = response.data.comments;
         return true;
+        }
       } catch (error) {
         console.log(error);
       }

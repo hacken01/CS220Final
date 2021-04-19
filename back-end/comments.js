@@ -12,21 +12,16 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-
 const users = require("./users.js");
 const posts = require("./posts.js");
-
 //
 // Commentss
 //
-
 const User = users.model;
 const validUser = users.valid;
 
 const Post = posts.model;
 const validPost = posts.valid;
-
-
 
 // This is the schema for a comment
 const commentSchema = new mongoose.Schema({
@@ -49,7 +44,7 @@ const commentSchema = new mongoose.Schema({
 const Comment = mongoose.model('Comment', commentSchema);
 
 // get comments -- will list comments that a user has submitted
-router.get('/:id', validUser, async(req, res) => {
+router.get('/:id', validUser, async (req, res) => {
     let comments = [];
     //LOOK up post
     let post = await Post.findOne({ _id: req.params.id });
@@ -60,7 +55,7 @@ router.get('/:id', validUser, async(req, res) => {
         }).sort({
             created: -1
         }).populate('user');
-
+        console.log("get comments was called");
         return res.send({
             comments: comments
         });
@@ -71,7 +66,7 @@ router.get('/:id', validUser, async(req, res) => {
 });
 
 // create a comment
-router.post('/:id', validUser, async(req, res) => {
+router.post('/:id', validUser, async (req, res) => {
     //LOOK up photo
     let post = await Post.findOne({ _id: req.params.id }).populate('user'); //Do I need to populate by photo?
 
@@ -81,7 +76,7 @@ router.post('/:id', validUser, async(req, res) => {
         post: post,
     });
     try {
-        console.log("Get comment was called");
+        console.log("Post comment was called");
         console.log(comment);
         await comment.save();
         return res.send(comment);
@@ -92,7 +87,7 @@ router.post('/:id', validUser, async(req, res) => {
 });
 
 // edit a comment -- only edits status and response
-router.put('/:id', validUser, async(req, res) => {
+router.put('/:id', validUser, async (req, res) => {
     // can only do this if an administrator
     if (req.user.role !== "admin") {
         return res.sendStatus(403);
@@ -103,6 +98,7 @@ router.put('/:id', validUser, async(req, res) => {
         });
     }
     try {
+        console.log("edit a comment was called");
         comment = await comment.findOne({
             _id: req.params.id
         });
