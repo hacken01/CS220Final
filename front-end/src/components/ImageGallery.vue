@@ -8,10 +8,16 @@
         <p class="postName">{{post.user.firstName}} {{post.user.lastName}}</p>
       </div>
       <p class="postDate">{{formatDate(post.created)}}</p>
-      <div class="comments">
-            <CommentForm v-if="user" />
-            <Login v-else />
+
+      <div class="comments" v-for="comment in comments" v-bind:key="comment.id">
+            <div class="comment">
+                <div class="comment">
+                <h3>Time: {{time(comment.created)}}</h3>
+                <p>{{comment.comment}}</p>
+                </div>
+            </div>
         </div>
+      
     </div>
 
     
@@ -24,13 +30,13 @@
 //import axios from 'axios';
 import axios from 'axios';
 import moment from 'moment';
-import CommentForm from '@/components/CommentForm.vue';
-import Login from '@/components/Login.vue';
+//import CommentForm from '@/components/CommentForm.vue';
+//import Login from '@/components/Login.vue';
 export default {
   name: 'ImageGallery',
   components: {
-    CommentForm,
-    Login,
+    //CommentForm,
+    //Login,
   },
   props: {
     posts: Array

@@ -1,7 +1,9 @@
 <template>
 <div class="main">
   <div class="menu">
-    <p><a @click="toggleUpload">Upload Image<i class="fas fa-image"></i></a></p>
+    <div class="uploadBox">
+      <div class="uploadImg"><a @click="toggleUpload">Upload Image<i class="fas fa-image"></i></a></div>
+    </div>
     <h2>{{user.firstName}} {{user.lastName}} <a @click="logout"><i class="fas fa-sign-out-alt"></i></a></h2>
     <uploader :show="show" @close="close" @uploadFinished="uploadFinished" />
   </div>
@@ -77,5 +79,19 @@ export default {
 
 .menu h2 {
   font-size: 14px;
+}
+
+.uploadBox {
+  background-color: white;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 25px;
+  color: #3c3c42;
+  border-radius: 5px;
+}
+
+.uploadImg:hover{
+  color: #42b983;
+  
 }
 </style>

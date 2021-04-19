@@ -144,7 +144,7 @@ export default {
 }
 
 .post {
-  background: pink;
+  background: white;
 }
 
 .postInfo {
