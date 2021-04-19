@@ -22,6 +22,7 @@
 
 <script>
 //import axios from 'axios';
+import axios from 'axios';
 import moment from 'moment';
 import CommentForm from '@/components/CommentForm.vue';
 import Login from '@/components/Login.vue';
@@ -57,14 +58,75 @@ export default {
         }
     }
   },
+  created() {
+    this.getPost();
+    this.getComments();
+  },
   methods: {
+    async getPosts() {
+      try {
+        let response = await axios.get("/api/posts/all");
+        this.posts = response.data;
+      } catch (error) {
+        this.error = error.response.data.message;
+      }
+    },
+    async getPost() {
+      try {
+        let response = await axios.get("/api/posts/"+this.$route.params.id);
+        this.post = response.data;
+        console.log(this.post);
+      } catch (error) {
+        this.error = error.response.data.message;
+      }
+    },
     formatDate(date) {
       if (moment(date).diff(Date.now(), 'days') < 15)
         return moment(date).fromNow();
       else
         return moment(date).format('d MMMM YYYY');
-    }
-  },}
+    },
+    async logout() {
+        try {
+        await axios.delete("/api/users");
+        this.$root.$data.user = null;
+        } catch (error) {
+        this.$root.$data.user = null;
+        }
+    },
+    async getComments() {
+      try {
+        let response = await axios.get("/api/comments");
+        this.comments = response.data.comments;
+        return true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    time(d) {
+      return moment(d).format('D MMMM YYYY, h:mm:ss a');
+    },
+    setCreating() {
+    this.creating = true;
+    },
+    cancelCreating() {
+        this.creating = false;
+    },
+    async addComment() {
+      try {
+        await axios.post("/api/comments", {
+          comment: this.comment
+        });
+        this.comment = "";
+        this.creating = false;
+        this.getComments();
+        return true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  }
+}
 </script>
 
 <style scoped>
