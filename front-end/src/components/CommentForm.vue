@@ -135,7 +135,7 @@ export default {
 }
 
 .menu {
-  display: flex;
+  display: inline-block;
   
   justify-content: right;
   color: black;
@@ -152,6 +152,10 @@ export default {
   width: 100%;
   text-align: center;
   color: black;
+}
+
+.image {
+  display: inline-block;
 }
 
 textarea {

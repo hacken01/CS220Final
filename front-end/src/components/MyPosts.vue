@@ -68,7 +68,7 @@ export default {
 
 <style scoped>
 .menu {
-  display: flex;
+  display: inline-block;
   justify-content: space-between;
   color: white;
   margin-left: 2.5%;

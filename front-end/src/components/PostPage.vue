@@ -1,9 +1,10 @@
 <template>
 <div class="post">
-    <div class="menu"  v-bind="post">
+  <div class="PostBox">
+    <div class="login"  v-bind="post">
         <h2>Logged in as: {{user.firstName}} {{user.lastName}}</h2>
     </div>
-    <div class="image" v-bind="post">
+    <div class="image" id="imageBlock" v-bind="post">
         <img :src="post.path" /> 
         <h3 class="title">{{post.title}}</h3>
         <h2 class="title">{{post.description}}</h2>
@@ -36,6 +37,7 @@
             </div>
         </div>
     
+    </div>
     </div>
 </template>
 
@@ -141,71 +143,91 @@ export default {
   padding-top: 20px;
 }
 
-.menu {
-  display: flex;
-  
-  justify-content: right;
-  color: black;
-}
-
-.menu h2 {
-  font-size: 14px;
-}
-
 .post {
+  background: pink;
+}
+
+.postInfo {
+  display: inline-block;
+  justify-content: space-between;
+  font-size: 0.8em;
+  color: #3c3c42;
+}
+
+.postInfo p {
+  margin: 0px;
+  padding: 5px;
+  color: #3c3c42;
+}
+
+.postDate {
+  font-size: 0.7em;
+  font-weight: normal;
+  padding: 5px;
+  color: #3c3c42;
+}
+
+p {
+  margin: 0px;
+}
+
+/* Masonry */
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.image-gallery {
+  column-gap: 1em;
+  margin-left:2%;
+  margin-right:2%;
+  justify-content: center;
+}
+
+.image {
   margin: 0 0 1.5em;
   display: inline-block;
-  justify-content: center;
   width: 100%;
-  text-align: center;
-  color: black;
-}
-
-textarea {
-  width: 100%;
-  max-width: 500px;
-  margin-bottom: 5px;
-}
-
-
-label {
-  background-color: #000;
-  color: white;
+  border-radius: 5px;
+  background-color: white;
   padding: 5px;
-  border-radius: 30px;
-  font-size: 12px;
-  margin-right: 10px;
+  border: 5px solid white;
+
 }
 
-.post img {
-  width: 60%;
-  padding-top: 10%
+#imageBlock {
+  display: inline-block;
 }
 
-img{
-    width: 200px;
+.image img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.image:hover{
+  border: 5px solid #42b983;
+  border-radius: 5px;
 }
 
 /* Masonry on large screens */
 @media only screen and (min-width: 1024px) {
-  .post img {
-    width: 60%;
-    padding-top: 10%
+  .image-gallery {
+    column-count: 4;
   }
 }
 
 /* Masonry on medium-sized screens */
 @media only screen and (max-width: 1023px) and (min-width: 768px) {
-  .post img {
-    width: 80%;
+  .image-gallery {
+    column-count: 3;
   }
 }
 
 /* Masonry on small screens */
 @media only screen and (max-width: 767px) and (min-width: 540px) {
-  .post img {
-    width: 100%;
-    margin-top: 30%
+  .image-gallery {
+    column-count: 2;
   }
 }
 

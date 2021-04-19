@@ -44,7 +44,7 @@ export default {
 
 <style scoped>
 .postInfo {
-  display: flex;
+  display: inline-block;
   justify-content: space-between;
   font-size: 0.8em;
   color: #3c3c42;

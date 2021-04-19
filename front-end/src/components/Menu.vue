@@ -55,7 +55,7 @@ export default {
   display: flex;
   
   justify-content: right;
-  color: black;
+  color: white;
 }
 
 .menu h2 {

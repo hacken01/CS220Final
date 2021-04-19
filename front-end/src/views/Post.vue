@@ -4,12 +4,15 @@
         <Menu v-if="user" />
         <!--<h2>Logged in as: {{user.firstName}} {{user.lastName}}</h2>-->
     </div>
+    
     <div class="image" v-bind="post">
+      <div class="imageBlock">
         <img :src="post.path" /> 
         <h3 class="title">{{post.title}}</h3>
         <h2 class="title">{{post.description}}</h2>
         <h2 class="title">By: {{post.user.username}}</h2>
         <p class="postDate">{{formatDate(post.created)}}</p>
+        </div>
     </div>
     <div class="commentForm">
 
@@ -137,9 +140,9 @@ export default {
 
 .menu {
   display: flex;
-  
   justify-content: right;
-  color: black;
+  color: white;
+  margin-left: 25px;
 }
 
 .menu h2 {
@@ -152,7 +155,7 @@ export default {
   justify-content: center;
   width: 100%;
   text-align: center;
-  color: black;
+  color: white;
 }
 
 textarea {
@@ -161,6 +164,16 @@ textarea {
   margin-bottom: 5px;
 }
 
+.image {
+  display: inline-block;
+  width: 50%;
+
+}
+
+.imageBlock {
+  background-color: white;
+  border-radius: 5px;
+}
 
 label {
   background-color: #000;
@@ -173,7 +186,6 @@ label {
 
 .post img {
   width: 60%;
-  padding-top: 10%
 }
 
 img{
