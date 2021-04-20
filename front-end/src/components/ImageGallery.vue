@@ -79,7 +79,7 @@ export default {
     }
   },
   created() {
-    this.getPost();
+    this.getPosts();
     this.getComments();
   },
   methods: {
