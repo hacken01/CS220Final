@@ -72,7 +72,7 @@ export default {
     this.getComments();
   },
   methods: {
-    async getPost() {
+    async getPosts() {
       try {
         let response = await axios.get("/api/posts/all");
         this.posts = response.data;

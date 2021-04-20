@@ -12,16 +12,21 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+
 const users = require("./users.js");
 const posts = require("./posts.js");
+
 //
 // Commentss
 //
+
 const User = users.model;
 const validUser = users.valid;
 
 const Post = posts.model;
 const validPost = posts.valid;
+
+
 
 // This is the schema for a comment
 const commentSchema = new mongoose.Schema({
@@ -55,7 +60,7 @@ router.get('/:id', validUser, async(req, res) => {
         }).sort({
             created: -1
         }).populate('user');
-        console.log("get comments was called");
+
         return res.send({
             comments: comments
         });
@@ -65,51 +70,24 @@ router.get('/:id', validUser, async(req, res) => {
     }
 });
 
-/*// create a comment
+// create a comment
 router.post('/:id', validUser, async(req, res) => {
     //LOOK up photo
     let post = await Post.findOne({ _id: req.params.id }).populate('user'); //Do I need to populate by photo?
 
-    if (!post) {
-        res.sendStatus(404);
-        return;
-    }
     const comment = new Comment({
         comment: req.body.comment,
         user: req.user,
         post: post,
     });
     try {
-        console.log("Post comment was called");
+        console.log("Get comment was called");
         console.log(comment);
         await comment.save();
         return res.send(comment);
     } catch (error) {
         console.log(error);
         return res.sendStatus(500);
-    }
-});*/
-
-// Create a new Comment to post
-router.post('/:postID', async(req, res) => {
-    try {
-        let post = await Post.findOne({ _id: req.params.postID }).populate('user');;
-        if (!post) {
-            res.sendStatus(404);
-            return;
-        }
-        let comment = new Comment({
-            comment: req.body.comment,
-            user: req.user,
-            post: post,
-        });
-        console.log("new Comment");
-        console.log(comment);
-        await comment.save();
-        res.send(comment);
-    } catch (error) {
-        console.log(error);
-        res.sendStatus(500);
     }
 });
 
@@ -125,7 +103,6 @@ router.put('/:id', validUser, async(req, res) => {
         });
     }
     try {
-        console.log("edit a comment was called");
         comment = await comment.findOne({
             _id: req.params.id
         });

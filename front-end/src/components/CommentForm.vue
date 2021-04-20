@@ -102,7 +102,7 @@ export default {
       try {
         console.log("Comment Form " + this.$route.params.id);
         if(this.$route.params.id != null){
-        let response = await axios.get("/api/comments/"+this.$route.params.id); //DO I NEED TO FILTER BY PHOTO HERE?
+        let response = await axios.get("/api/comments/"+this.$route.params.id);
         this.comments = response.data.comments;
         return true;
         }
