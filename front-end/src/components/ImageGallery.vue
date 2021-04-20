@@ -10,31 +10,30 @@
       <p class="postDate">{{formatDate(post.created)}}</p>
 
       <div class="commentForm">
-      <div>
-      <button @click="setCreating" class="pure-button button-xsmall">
-          <legend>Leave a Comment:</legend>
-      </button>
+        <div>
+        <button @click="setCreating" class="pure-button button-xsmall">
+            <legend>Leave a Comment:</legend>
+        </button>
+        </div>
+
+        <form class="pure-form" v-if="creating" @submit.prevent="addComment">
+      
+        <fieldset>
+            <textarea v-model="comment"></textarea><!--ISSUE WITH COMMENT Method??-->
+            <br />
+            <button @click="cancelCreating" class="pure-button space-right">Cancel</button>
+            <button @click="addComment(post)" class="pure-button pure-button-primary" type="submit">Submit</button>
+        </fieldset>
+        </form>
+
+        <div class="comment" v-for="comment in comments[post._id] " :key="comment.id">
+          <p>{{comment.comment}} -- Posted {{formatDate(comment.created)}} by TEST</p>
+          <!--<button @click="deleteComment(post._id,comment._id)" type="submit" value="R"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          <button @click="editComment(post._id,comment._id)" type="submit" value="E"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>-->
+        </div>
       </div>
-
-      <form class="pure-form" v-if="creating" @submit.prevent="addComment(post)">
-      
-      <fieldset>
-          <textarea v-model="comment"></textarea><!--ISSUE WITH COMMENT Method??-->
-          <br />
-          <button @click="cancelCreating" class="pure-button space-right">Cancel</button>
-          <button @click="addComment(post)" class="pure-button pure-button-primary" type="submit">Submit</button>
-      </fieldset>
-      </form>
+  
     </div>
-
-    <div class="comment" v-for="comment in comments[post._id] " :key="comment.id">
-      <p>{{comment.comment}} -- Posted {{formatDate(comment.created)}} by {{comment.user.username}}</p>
-      <button @click="deleteComment(post._id,comment._id)" type="submit" value="R"><i class="fa fa-trash" aria-hidden="true"></i></button>
-      <button @click="editComment(post._id,comment._id)" type="submit" value="E"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>
-    </div>
-      
-    </div>
-
   </section>
 </div>
 </template>
@@ -74,13 +73,12 @@ export default {
             return this.$root.$data.user;
         }
         else{
-
             return this.$root.$data.user;
         }
     }
   },
   created() {
-    this.getPost();
+    this.getPosts();
     this.getComments();
   },
   methods: {
@@ -98,7 +96,7 @@ export default {
         let response = await axios.get("/api/posts/"+this.$route.params.id);
         this.post = response.data;
         }
-        console.log(this.post);
+        //console.log(this.post);
       } catch (error) {
         this.error = error.response.data.message;
       }
@@ -123,6 +121,7 @@ export default {
           const response = await axios.get(`/api/comments/` + post._id);
           // use vue.set to make it reactive 
           Vue.set(this.comments,post._id,response.data); 
+          console.log(response.data);
         }
       } catch (error) {
         //console.log(error);
@@ -141,11 +140,8 @@ export default {
       try {
         console.log(post)
         await axios.post(`/api/comments/` + post._id, {
-          //username: this.username,
           comment: this.comment,
         });
-        //this.username = "";
-        //this.otherComment = "";
         this.getComments();
       } catch (error) {
         //console.log(error);

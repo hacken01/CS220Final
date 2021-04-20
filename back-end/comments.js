@@ -70,6 +70,10 @@ router.post('/:id', validUser, async(req, res) => {
     //LOOK up photo
     let post = await Post.findOne({ _id: req.params.id }).populate('user'); //Do I need to populate by photo?
 
+    if (!post) {
+        res.sendStatus(404);
+        return;
+    }
     const comment = new Comment({
         comment: req.body.comment,
         user: req.user,
@@ -85,6 +89,29 @@ router.post('/:id', validUser, async(req, res) => {
         return res.sendStatus(500);
     }
 });
+
+/*// Create a new Comment to post
+/*router.post('/:postID', async(req, res) => {
+    try {
+        let post = await Post.findOne({ _id: req.params.postID });
+        if (!post) {
+            res.sendStatus(404);
+            return;
+        }
+        let comment = new Comment({
+            comment: req.body.comment,
+            user: req.user,
+            post: post,
+        });
+        console.log("new Comment");
+
+        await comment.save();
+        res.send(comment);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+});*/
 
 // edit a comment -- only edits status and response
 router.put('/:id', validUser, async(req, res) => {
@@ -109,29 +136,6 @@ router.put('/:id', validUser, async(req, res) => {
     } catch (error) {
         console.log(error);
         return res.sendStatus(500);
-    }
-});
-
-// Create a new Comment to post
-app.post('/:postID', async(req, res) => {
-    try {
-        let post = await Post.findOne({ _id: req.params.postID });
-        if (!post) {
-            res.sendStatus(404);
-            return;
-        }
-        let comment = new Comment({
-            comment: req.body.comment,
-            user: req.user,
-            post: post,
-        });
-        console.log("new Comment");
-        console.log(comment.otherComment);
-        await comment.save();
-        res.send(comment);
-    } catch (error) {
-        console.log(error);
-        res.sendStatus(500);
     }
 });
 
