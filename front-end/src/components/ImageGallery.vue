@@ -9,18 +9,31 @@
       </div>
       <p class="postDate">{{formatDate(post.created)}}</p>
 
-      <div class="comments" v-for="comment in comments" v-bind:key="comment.id">
-            <div class="comment">
-                <div class="comment">
-                <h3>Time: {{time(comment.created)}}</h3>
-                <p>{{comment.comment}}</p>
-                </div>
-            </div>
-        </div>
+      <div class="commentForm">
+      <div>
+      <button @click="setCreating" class="pure-button button-xsmall">
+          <legend>Leave a Comment:</legend>
+      </button>
+      </div>
+
+      <form class="pure-form" v-if="creating" @submit.prevent="addComment">
       
+      <fieldset>
+          <textarea v-model="comment"></textarea><!--ISSUE WITH COMMENT Method??-->
+          <br />
+          <button @click="cancelCreating" class="pure-button space-right">Cancel</button>
+          <button @click="addComment(post)" class="pure-button pure-button-primary" type="submit">Submit</button>
+      </fieldset>
+      </form>
     </div>
 
-    
+    <div class="comment" v-for="comment in comments[post._id] " :key="comment.id">
+      <p>{{comment.comment}} -- Posted {{formatDate(comment.created)}} by {{comment.user.username}}</p>
+      <button @click="deleteComment(post._id,comment._id)" type="submit" value="R"><i class="fa fa-trash" aria-hidden="true"></i></button>
+      <button @click="editComment(post._id,comment._id)" type="submit" value="E"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>
+    </div>
+      
+    </div>
 
   </section>
 </div>
@@ -30,6 +43,7 @@
 //import axios from 'axios';
 import axios from 'axios';
 import moment from 'moment';
+import Vue from 'vue';
 //import CommentForm from '@/components/CommentForm.vue';
 //import Login from '@/components/Login.vue';
 export default {
@@ -50,7 +64,8 @@ export default {
               username: ''
           }
       },
-      comments: [],
+      comments: {},
+      comment: '',
     }
   },
   computed: {
@@ -104,11 +119,13 @@ export default {
     },
     async getComments() {
       try {
-        let response = await axios.get("/api/comments");
-        this.comments = response.data.comments;
-        return true;
+        for(let post of this.posts){
+          const response = await axios.get(`/api/posts/${post._id}/comments`);
+          // use vue.set to make it reactive 
+          Vue.set(this.comments,post._id,response.data); 
+        }
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     },
     time(d) {
@@ -120,17 +137,38 @@ export default {
     cancelCreating() {
         this.creating = false;
     },
-    async addComment() {
+    async addComment(post) {
       try {
-        await axios.post("/api/comments", {
-          comment: this.comment
+        console.log(post)
+        await axios.post(`/api/comments/${post._id}/comments`, {
+          //username: this.username,
+          comment: this.comment,
         });
-        this.comment = "";
-        this.creating = false;
+        //this.username = "";
+        //this.otherComment = "";
         this.getComments();
-        return true;
       } catch (error) {
-        console.log(error);
+        //console.log(error);
+      }
+    },
+    async editComment(postId,commentId){
+        //console.log("comment Edited ");
+      try {
+        axios.put(`/api/posts/${postId}/comments/${commentId}`, {
+          comment: this.comment,
+        });
+        this.getComments();
+      } catch (error) {
+        //console.log(error);
+      }
+    },
+    async deleteComment(postId, commentId) {
+        //console.log("comment Deleted");
+      try {
+        await axios.delete(`/api/posts/${postId}/comments/${commentId}`);
+        this.getComments();
+      } catch (error) {
+        //console.log(error);
       }
     },
   }

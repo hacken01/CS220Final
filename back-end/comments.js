@@ -44,7 +44,7 @@ const commentSchema = new mongoose.Schema({
 const Comment = mongoose.model('Comment', commentSchema);
 
 // get comments -- will list comments that a user has submitted
-router.get('/:id', validUser, async (req, res) => {
+router.get('/:id', validUser, async(req, res) => {
     let comments = [];
     //LOOK up post
     let post = await Post.findOne({ _id: req.params.id });
@@ -66,7 +66,7 @@ router.get('/:id', validUser, async (req, res) => {
 });
 
 // create a comment
-router.post('/:id', validUser, async (req, res) => {
+router.post('/:id', validUser, async(req, res) => {
     //LOOK up photo
     let post = await Post.findOne({ _id: req.params.id }).populate('user'); //Do I need to populate by photo?
 
@@ -87,7 +87,7 @@ router.post('/:id', validUser, async (req, res) => {
 });
 
 // edit a comment -- only edits status and response
-router.put('/:id', validUser, async (req, res) => {
+router.put('/:id', validUser, async(req, res) => {
     // can only do this if an administrator
     if (req.user.role !== "admin") {
         return res.sendStatus(403);
@@ -109,6 +109,29 @@ router.put('/:id', validUser, async (req, res) => {
     } catch (error) {
         console.log(error);
         return res.sendStatus(500);
+    }
+});
+
+// Create a new Comment to post
+app.post('/:postID/comments', async(req, res) => {
+    try {
+        let post = await Post.findOne({ _id: req.params.postID });
+        if (!post) {
+            res.sendStatus(404);
+            return;
+        }
+        let comment = new Comment({
+            comment: req.body.comment,
+            user: req.user,
+            post: post,
+        });
+        console.log("new Comment");
+        console.log(comment.otherComment);
+        await comment.save();
+        res.send(comment);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
     }
 });
 
