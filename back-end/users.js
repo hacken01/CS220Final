@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
 
 // This is a hook that will be called before a user record is saved,
 // allowing us to be sure to salt and hash the password first.
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
     // only hash the password if it has been modified (or is new)
     if (!this.isModified('password'))
         return next();
@@ -49,7 +49,7 @@ userSchema.pre('save', async function(next) {
 // This is a method that we can call on User objects to compare the hash of the
 // password the browser sends with the has of the user's true password stored in
 // the database.
-userSchema.methods.comparePassword = async function(password) {
+userSchema.methods.comparePassword = async function (password) {
     try {
         // note that we supply the hash stored in the database (first argument) and
         // the plaintext password. argon2 will do the hashing and salting and
@@ -65,7 +65,7 @@ userSchema.methods.comparePassword = async function(password) {
 // object to JSON. It deletes the password hash from the object. This ensures
 // that we never send password hashes over our API, to avoid giving away
 // anything to an attacker.
-userSchema.methods.toJSON = function() {
+userSchema.methods.toJSON = function () {
     var obj = this.toObject();
     delete obj.password;
     return obj;
@@ -77,7 +77,7 @@ const User = mongoose.model('User', userSchema);
 /* Middleware */
 
 // middleware function to check for logged-in users
-const validUser = async(req, res, next) => {
+const validUser = async (req, res, next) => {
     if (!req.session.userID)
         return res.status(403).send({
             message: "not logged in"
@@ -110,7 +110,7 @@ const validUser = async(req, res, next) => {
    module that imports this one to use a complete path, such as "/api/user" */
 
 // create a new user
-router.post('/', async(req, res) => {
+router.post('/', async (req, res) => {
     // Make sure that the form coming from the browser includes all required fields,
     // otherwise return an error. A 400 error means the request was
     // malformed.
@@ -153,7 +153,7 @@ router.post('/', async(req, res) => {
 });
 
 // login a user
-router.post('/login', async(req, res) => {
+router.post('/login', async (req, res) => {
     // Make sure that the form coming from the browser includes a username and a
     // password, otherwise return an error.
     if (!req.body.username || !req.body.password)
@@ -191,7 +191,7 @@ router.post('/login', async(req, res) => {
 });
 
 // get logged in user
-router.get('/', validUser, async(req, res) => {
+router.get('/', validUser, async (req, res) => {
     try {
         res.send({
             user: req.user
@@ -203,7 +203,7 @@ router.get('/', validUser, async(req, res) => {
 });
 
 // logout
-router.delete("/", validUser, async(req, res) => {
+router.delete("/", validUser, async (req, res) => {
     try {
         req.session = null;
         res.sendStatus(200);
@@ -212,7 +212,6 @@ router.delete("/", validUser, async(req, res) => {
         return res.sendStatus(500);
     }
 });
-
 
 module.exports = {
     routes: router,

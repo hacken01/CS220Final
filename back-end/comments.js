@@ -12,7 +12,6 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-
 const users = require("./users.js");
 const posts = require("./posts.js");
 
@@ -25,8 +24,6 @@ const validUser = users.valid;
 
 const Post = posts.model;
 const validPost = posts.valid;
-
-
 
 // This is the schema for a comment
 const commentSchema = new mongoose.Schema({
@@ -49,7 +46,7 @@ const commentSchema = new mongoose.Schema({
 const Comment = mongoose.model('Comment', commentSchema);
 
 // get comments -- will list comments that a user has submitted
-router.get('/:id', validUser, async(req, res) => {
+router.get('/:id', validUser, async (req, res) => {
     let comments = [];
     //LOOK up post
     let post = await Post.findOne({ _id: req.params.id });
@@ -71,10 +68,14 @@ router.get('/:id', validUser, async(req, res) => {
 });
 
 // create a comment
-router.post('/:id', validUser, async(req, res) => {
+router.post('/:Postid', validUser, async (req, res) => {
     //LOOK up photo
-    let post = await Post.findOne({ _id: req.params.id }).populate('user'); //Do I need to populate by photo?
+    let post = await Post.findOne({ _id: req.params.Postid }).populate('user'); //Do I need to populate by photo?
 
+    if (!post) {
+        console.log("Post now found");
+        return res.sendStatus(500);
+    }
     const comment = new Comment({
         comment: req.body.comment,
         user: req.user,
@@ -92,7 +93,7 @@ router.post('/:id', validUser, async(req, res) => {
 });
 
 // edit a comment -- only edits status and response
-router.put('/:id', validUser, async(req, res) => {
+router.put('/:id', validUser, async (req, res) => {
     // can only do this if an administrator
     if (req.user.role !== "admin") {
         return res.sendStatus(403);
