@@ -135,10 +135,12 @@ export default {
     async addComment(post) {
       try {
         console.log(post)
+         if(post._id){
         await axios.post(`/api/comments/` + post._id, {
           comment: this.comment,
         });
         this.getComments();
+         }
       } catch (error) {
         //console.log(error);
       }
