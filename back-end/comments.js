@@ -65,7 +65,7 @@ router.get('/:id', validUser, async(req, res) => {
     }
 });
 
-// create a comment
+/*// create a comment
 router.post('/:id', validUser, async(req, res) => {
     //LOOK up photo
     let post = await Post.findOne({ _id: req.params.id }).populate('user'); //Do I need to populate by photo?
@@ -88,12 +88,12 @@ router.post('/:id', validUser, async(req, res) => {
         console.log(error);
         return res.sendStatus(500);
     }
-});
+});*/
 
-/*// Create a new Comment to post
-/*router.post('/:postID', async(req, res) => {
+// Create a new Comment to post
+router.post('/:postID', async(req, res) => {
     try {
-        let post = await Post.findOne({ _id: req.params.postID });
+        let post = await Post.findOne({ _id: req.params.postID }).populate('user');;
         if (!post) {
             res.sendStatus(404);
             return;
@@ -104,14 +104,14 @@ router.post('/:id', validUser, async(req, res) => {
             post: post,
         });
         console.log("new Comment");
-
+        console.log(comment);
         await comment.save();
         res.send(comment);
     } catch (error) {
         console.log(error);
         res.sendStatus(500);
     }
-});*/
+});
 
 // edit a comment -- only edits status and response
 router.put('/:id', validUser, async(req, res) => {

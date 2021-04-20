@@ -52,12 +52,13 @@ export default {
     //Login,
   },
   props: {
-    posts: Array
+    //posts: Array
   },
   data() {
     return {
       creating: false,
       error: '',
+      posts: {},
       post: {
           user: {
               username: ''
