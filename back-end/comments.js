@@ -50,17 +50,24 @@ router.get('/:id', validUser, async (req, res) => {
     let comments = [];
     //LOOK up post
     let post = await Post.findOne({ _id: req.params.id });
+
+    if (!post) {
+        console.log("Post not found");
+        return res.sendStatus(500);
+    }
+
     try {
-        let comments = await Comment.find({
+        comments = await Comment.find({
             //user: req.user //DO I NEED TO CHANGE THIS IS PHOTO?
             post: post
         }).sort({
             created: -1
         }).populate('user');
 
-        return res.send({
-            comments: comments
-        });
+        console.log("we got the back end comments");
+        console.log(comments);
+
+        return res.send(comments);
     } catch (error) {
         console.log(error);
         return res.sendStatus(500);
@@ -68,9 +75,10 @@ router.get('/:id', validUser, async (req, res) => {
 });
 
 // create a comment
-router.post('/:Postid', validUser, async (req, res) => {
+router.post('/:id', validUser, async (req, res) => {
     //LOOK up photo
-    let post = await Post.findOne({ _id: req.params.Postid }).populate('user'); //Do I need to populate by photo?
+    console.log("created Comment Called");
+    let post = await Post.findOne({ _id: req.params.id }); //Do I need to populate by photo?
 
     if (!post) {
         console.log("Post now found");
@@ -82,7 +90,7 @@ router.post('/:Postid', validUser, async (req, res) => {
         post: post,
     });
     try {
-        console.log("Get comment was called");
+
         console.log(comment);
         await comment.save();
         return res.send(comment);

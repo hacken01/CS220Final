@@ -26,8 +26,8 @@
         </fieldset>
         </form>
 
-        <div class="comment" v-for="comment in comments[post._id] " :key="comment.id">
-          <p>{{comment.comment}} -- Posted {{formatDate(comment.created)}} by TEST</p>
+        <div class="comment" v-for="item in comments[post._id] " :key="item.id">
+          <p>{{item.comment}} -- Posted {{formatDate(item.created)}} by {{item.user.username}} </p>
           <!--<button @click="deleteComment(post._id,comment._id)" type="submit" value="R"><i class="fa fa-trash" aria-hidden="true"></i></button>
           <button @click="editComment(post._id,comment._id)" type="submit" value="E"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>-->
         </div>
@@ -79,7 +79,7 @@ export default {
     }
   },
   created() {
-    this.getPost();
+    this.getPosts();
     this.getComments();
   },
   methods: {
@@ -122,6 +122,7 @@ export default {
           const response = await axios.get(`/api/comments/` + post._id);
           // use vue.set to make it reactive 
           Vue.set(this.comments,post._id,response.data); 
+
           console.log(response.data);
         }
       } catch (error) {
@@ -139,11 +140,15 @@ export default {
     },
     async addComment(post) {
       try {
+        console.log("Comment Added");
         console.log(post)
-        await axios.post(`/api/comments/` + post._id, {
-          comment: this.comment,
-        });
-        this.getComments();
+        if(post._id){
+          await axios.post(`/api/comments/` + post._id, {
+            comment: this.comment,
+          });
+          this.getComments();
+        }
+        this.comment = '';
       } catch (error) {
         //console.log(error);
       }
