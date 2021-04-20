@@ -1,36 +1,32 @@
 <template>
 <div class="home">
-  <image-gallery :posts="posts" />
-  <p v-if="error">{{error}}</p>
+  <Lobby v-if="user" />
+  <Login v-else />
 </div>
 </template>
 
 <script>
 import axios from 'axios';
-import ImageGallery from '@/components/ImageGallery.vue';
+import Lobby from '@/components/Lobby.vue';
+import Login from '@/components/Login.vue';
 export default {
   name: 'Home',
   components: {
-    ImageGallery,
+    Lobby,
+    Login,
   },
-  data() {
-    return {
-      posts: [],
-      error: '',
+  async created() {
+    try {
+      let response = await axios.get('/api/users');
+      this.$root.$data.user = response.data.user;
+    } catch (error) {
+      this.$root.$data.user = null;
     }
   },
-  created() {
-    this.getPosts();
-  },
-  methods: {
-    async getPosts() {
-      try {
-        let response = await axios.get("/api/posts/all");
-        this.posts = response.data;
-      } catch (error) {
-        this.error = error.response.data.message;
-      }
-    },
+  computed: {
+    user() {
+      return this.$root.$data.user;
+    }
   }
 }
 </script>

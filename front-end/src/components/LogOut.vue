@@ -1,34 +1,19 @@
 <template>
 <div class="hero">
   <div class="welcome">
-  <h1>Welcome!</h1>
-  <h3>To get started please Sign-In or Register</h3>
+  <h1>Already Signed In! :D</h1>
+  <h3>We hope you are enjoying your experience!</h3>
   </div>
   <div class="heroBox">
-    <button @click="setRegister" class="pure-button button-xsmall">
-        <legend>Register:</legend>
-    </button>
-
-    <button @click="setExisting" class="pure-button button-xsmall">
-        <legend>Login:</legend>
-    </button>
-
-    <Register v-if="register === true" />
-    <ExistingUser v-if="existing === true" />
-    
+    <button type="button" @click="logout">Log Out<i class="fas fa-sign-out-alt"></i></button>
   </div>
 </div>
 </template>
 
 <script>
-import Register from '@/components/Register.vue';
-import ExistingUser from '@/components/ExistingUser.vue';
+import axios from 'axios';
 export default {
   name: 'Login',
-  components: {
-    Register,
-    ExistingUser,
-  },
   data() {
     return {
       firstName: '',
@@ -43,14 +28,27 @@ export default {
       existing: false,
     }
   },
+  async created() {
+    try {
+      let response = await axios.get('/api/users');
+      this.$root.$data.user = response.data.user;
+    } catch (error) {
+      this.$root.$data.user = null;
+    }
+  },
+  computed: {
+    user() {
+      return this.$root.$data.user;
+    }
+  },
   methods: {
-    setRegister() {
-      this.register = true;
-      this.existing = false;
-    },
-    setExisting() {
-      this.register = false;
-      this.existing = true;
+    async logout() {
+      try {
+        await axios.delete("/api/users");
+        this.$root.$data.user = null;
+      } catch (error) {
+        this.$root.$data.user = null;
+      }
     },
   }
 }
@@ -85,6 +83,7 @@ h1 {
 
 .heroBox {
   text-align: center;
+  color: white;
 }
 
 .hero form legend {
@@ -116,8 +115,9 @@ button {
   background: white;
   color: #3c3c42;
   border-radius: 20px;
-  margin-left: 5px;
-  margin-right: 5px;
+  padding-left: 15px;
+  padding-right: 25px;
+
 }
 
 button:hover {

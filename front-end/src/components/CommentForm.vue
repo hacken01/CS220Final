@@ -10,7 +10,7 @@
       <form class="pure-form" v-if="creating" @submit.prevent="addComment">
       
       <fieldset>
-          <textarea v-model="comment"></textarea><!--ISSUE WITH COMMENT Method??-->
+         <textarea class="commentArea" v-model="comment"></textarea><!--ISSUE WITH COMMENT Method??-->
           <br />
           <button @click="cancelCreating" class="pure-button space-right">Cancel</button>
           <button class="pure-button pure-button-primary" type="submit">Submit</button>
@@ -35,7 +35,7 @@ export default {
   name: 'Post',
   data() {
     return {
-      creating: false,
+      creating: true,
       posts: [],
       error: '',
       post: {
@@ -192,6 +192,10 @@ img{
 
 .pure-button-primary, .pure-button-selected, a.pure-button-primary, a.pure-button-selected {
   background-color: #42b983;
+}
+
+button {
+  margin-left: 5px;
 }
 
 

@@ -9,6 +9,7 @@
     <div id="rightSide">
         <router-link to="/">Lobby</router-link>
         <router-link to="/dashboard">My Page</router-link>
+        <router-link to="/signUp">Sign Up</router-link>
         <router-link to="/about">About</router-link>
     </div>
   </div>

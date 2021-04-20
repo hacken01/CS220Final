@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Post from '../views/Post.vue'
+import SignUp from '../views/SignUp.vue'
 import About from '../views/About.vue'
 
 Vue.use(VueRouter)
@@ -21,6 +22,11 @@ const routes = [{
         path: '/post/:id',
         name: 'post',
         component: Post
+    },
+    {
+        path: '/signup',
+        name: 'signUp',
+        component: SignUp
     },
     {
         path: '/about',

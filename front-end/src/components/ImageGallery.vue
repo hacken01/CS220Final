@@ -11,25 +11,27 @@
 
       <div class="commentForm">
         <div>
-        <button @click="setCreating" class="pure-button button-xsmall">
-            <legend>Leave a Comment:</legend>
-        </button>
+          <button @click="setCreating" class="pure-button button-xsmall">
+              <legend>Leave a Comment:</legend>
+          </button>
         </div>
 
         <form class="pure-form" v-if="creating" @submit.prevent="addComment">
       
         <fieldset>
-            <textarea v-model="comment"></textarea><!--ISSUE WITH COMMENT Method??-->
+            <textarea class="commentArea" v-model="comment"></textarea><!--ISSUE WITH COMMENT Method??-->
             <br />
             <button @click="cancelCreating" class="pure-button space-right">Cancel</button>
             <button @click="addComment(post)" class="pure-button pure-button-primary" type="submit">Submit</button>
         </fieldset>
         </form>
 
-        <div class="comment" v-for="item in comments[post._id] " :key="item.id">
-          <p>{{item.comment}} -- Posted {{formatDate(item.created)}} by {{item.user.username}} </p>
-          <!--<button @click="deleteComment(post._id,comment._id)" type="submit" value="R"><i class="fa fa-trash" aria-hidden="true"></i></button>
-          <button @click="editComment(post._id,comment._id)" type="submit" value="E"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>-->
+        <div class="commentList">
+          <div class="comment" v-for="item in comments[post._id] " :key="item.id">
+            <p>{{item.comment}} -- Posted {{formatDate(item.created)}} by {{item.user.username}} </p>
+            <!--<button @click="deleteComment(post._id,comment._id)" type="submit" value="R"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            <button @click="editComment(post._id,comment._id)" type="submit" value="E"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>-->
+          </div>
         </div>
       </div>
   
@@ -56,7 +58,7 @@ export default {
   },
   data() {
     return {
-      creating: false,
+      creating: true,
       error: '',
       posts: {},
       post: {
@@ -200,6 +202,42 @@ export default {
 
 p {
   margin: 0px;
+}
+
+.commentArea {
+  margin-bottom: 5px;
+}
+
+.commentList {
+  overflow: auto;
+  max-height: 150px;
+  background-color: rgb(231, 230, 230);
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.commentList::-webkit-scrollbar {
+    width: 15px;
+    height: auto;
+}
+
+.commentList::-webkit-scrollbar-track {
+    background-color:lightgrey;
+    border-radius: 5px;
+}
+
+.commentList::-webkit-scrollbar-thumb {
+  background-color: #42b983;
+  border-radius: 5px;
+}
+
+.pure-button-primary, .pure-button-selected, a.pure-button-primary, a.pure-button-selected {
+  background-color: #42b983;
+}
+
+
+button {
+  margin-left: 5px;
 }
 
 /* Masonry */
