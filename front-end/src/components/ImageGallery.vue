@@ -16,7 +16,7 @@
       </button>
       </div>
 
-      <form class="pure-form" v-if="creating" @submit.prevent="addComment">
+      <form class="pure-form" v-if="creating" @submit.prevent="addComment(post)">
       
       <fieldset>
           <textarea v-model="comment"></textarea><!--ISSUE WITH COMMENT Method??-->
@@ -120,7 +120,7 @@ export default {
     async getComments() {
       try {
         for(let post of this.posts){
-          const response = await axios.get(`/api/posts/${post._id}/comments`);
+          const response = await axios.get(`/api/comments/` + post._id);
           // use vue.set to make it reactive 
           Vue.set(this.comments,post._id,response.data); 
         }
@@ -140,7 +140,7 @@ export default {
     async addComment(post) {
       try {
         console.log(post)
-        await axios.post(`/api/comments/${post._id}/comments`, {
+        await axios.post(`/api/comments/` + post._id, {
           //username: this.username,
           comment: this.comment,
         });

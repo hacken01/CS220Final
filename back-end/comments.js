@@ -113,7 +113,7 @@ router.put('/:id', validUser, async(req, res) => {
 });
 
 // Create a new Comment to post
-app.post('/:postID/comments', async(req, res) => {
+app.post('/:postID', async(req, res) => {
     try {
         let post = await Post.findOne({ _id: req.params.postID });
         if (!post) {
