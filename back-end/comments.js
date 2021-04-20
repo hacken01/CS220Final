@@ -66,7 +66,6 @@ router.get('/:id', validUser, async (req, res) => {
 
         console.log("we got the back end comments");
         console.log(comments);
-
         return res.send(comments);
     } catch (error) {
         console.log(error);

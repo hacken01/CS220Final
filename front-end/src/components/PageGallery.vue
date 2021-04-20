@@ -80,7 +80,7 @@ export default {
   methods: {
     async getPosts() {
       try {
-        let response = await axios.get("/api/posts/all");
+        let response = await axios.get("/api/posts");
         this.posts = response.data;
       } catch (error) {
         this.error = error.response.data.message;
@@ -141,6 +141,7 @@ export default {
         });
         this.getComments();
          }
+         this.comment = '';
       } catch (error) {
         //console.log(error);
       }
