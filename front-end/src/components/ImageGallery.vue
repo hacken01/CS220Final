@@ -28,7 +28,7 @@
 
         <div class="commentList">
           <div class="comment" v-for="item in comments[post._id] " :key="item.id">
-            <p>{{item.comment}} -- Posted {{formatDate(item.created)}} by {{item.user.username}} </p>
+            <p>{{item.comment}} -- Posted {{formatDate(item.created)}} by {{post.user.username}} </p>
             <!--<button @click="deleteComment(post._id,comment._id)" type="submit" value="R"><i class="fa fa-trash" aria-hidden="true"></i></button>
             <button @click="editComment(post._id,comment._id)" type="submit" value="E"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>-->
           </div>
@@ -82,13 +82,13 @@ export default {
   },
   created() {
     this.getPosts();
-    this.getComments();
   },
   methods: {
     async getPosts() {
       try {
         let response = await axios.get("/api/posts/all");
         this.posts = response.data;
+        this.getComments();
       } catch (error) {
         this.error = error.response.data.message;
       }

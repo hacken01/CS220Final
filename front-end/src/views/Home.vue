@@ -1,18 +1,18 @@
 <template>
 <div class="home">
-  <Lobby v-if="user" />
+  <LobbySignedIn v-if="user" />
   <Login v-else />
 </div>
 </template>
 
 <script>
 import axios from 'axios';
-import Lobby from '@/components/Lobby.vue';
+import LobbySignedIn from '@/components/LobbySignedIn.vue';
 import Login from '@/components/Login.vue';
 export default {
   name: 'Home',
   components: {
-    Lobby,
+    LobbySignedIn,
     Login,
   },
   async created() {

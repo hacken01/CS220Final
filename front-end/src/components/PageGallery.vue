@@ -28,9 +28,9 @@
         
         <div class="commentList">
           <div class="comment" v-for="comment in comments[post._id] " :key="comment.id">
-            <p>{{comment.comment}} -- Posted {{formatDate(comment.created)}} by {{comment.user.username}}</p> <!--THIS IS CURRENTLY BEING FILTERED BY USER
-            <button @click="deleteComment(post._id,comment._id)" type="submit" value="R"><i class="fa fa-trash" aria-hidden="true"></i></button>
-            <button @click="editComment(post._id,comment._id)" type="submit" value="E"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>-->
+            <p>{{comment.comment}} -- Posted {{formatDate(comment.created)}} by {{post.user.username}}</p>
+            <button @click="deleteComment(post)" type="submit" value="R"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            <button @click="editComment(post)" type="submit" value="E"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>
           </div>
         </div>
       </div>
@@ -84,6 +84,7 @@ export default {
       try {
         let response = await axios.get("/api/posts");
         this.posts = response.data;
+        this.getComments();
       } catch (error) {
         this.error = error.response.data.message;
       }
@@ -148,10 +149,10 @@ export default {
         //console.log(error);
       }
     },
-    async editComment(postId,commentId){
+    async editComment(post){
         //console.log("comment Edited ");
       try {
-        axios.put(`/api/posts/${postId}/comments/${commentId}`, {
+        axios.put(`/api/comments/` + post._id, {
           comment: this.comment,
         });
         this.getComments();
@@ -159,10 +160,10 @@ export default {
         //console.log(error);
       }
     },
-    async deleteComment(postId, commentId) {
+    async deleteComment(post) {
         //console.log("comment Deleted");
       try {
-        await axios.delete(`/api/posts/${postId}/comments/${commentId}`);
+        await axios.delete(`/api/comments/` + post._id,);
         this.getComments();
       } catch (error) {
         //console.log(error);
