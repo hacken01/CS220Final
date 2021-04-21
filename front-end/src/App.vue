@@ -15,7 +15,7 @@
   </div>
   <router-view /> <!--REPLACE WITH THE VIEW WE SELECT-->
   <div class="footer">
-    &copy; Twitcherest. | <a href="https://github.com/cjtracy16/finalProject.git">My github</a> | Conner Tracy &#38; Gabriel Arancibia | Hrs Spent: 30
+    &copy; Twitcherest. | <a href="https://github.com/cjtracy16/finalProject.git">My github</a> | Conner Tracy &#38; Gabriel Arancibia | Hrs Spent: 35
   </div>
 </div>
 </template>

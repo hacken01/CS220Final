@@ -46,7 +46,7 @@ const postSchema = new mongoose.Schema({
 const Post = mongoose.model('Post', postSchema);
 
 // upload post
-router.post("/", validUser, upload.single('post'), async (req, res) => {
+router.post("/", validUser, upload.single('post'), async(req, res) => {
     // check parameters
     if (!req.file)
         return res.status(400).send({
@@ -69,7 +69,7 @@ router.post("/", validUser, upload.single('post'), async (req, res) => {
 });
 
 // get my posts
-router.get("/", validUser, async (req, res) => {
+router.get("/", validUser, async(req, res) => {
     // return posts
     try {
         let posts = await Post.find({
@@ -85,7 +85,7 @@ router.get("/", validUser, async (req, res) => {
 });
 
 // get all posts
-router.get("/all", async (req, res) => {
+router.get("/all", async(req, res) => {
     try {
         let posts = await Post.find().sort({
             created: -1
@@ -98,13 +98,25 @@ router.get("/all", async (req, res) => {
 });
 
 // get a single post
-router.get("/:id", async (req, res) => {
+router.get("/:id", async(req, res) => {
     try {
         let post = await Post.findOne({ _id: req.params.id }).populate('user');
         return res.send(post);
     } catch (error) {
         console.log(error);
         return res.sendStatus(500);
+    }
+});
+
+//delete the Comment from the database
+router.delete('/:id', async(req, res) => {
+    try {
+        let post = await Post.findOne({ _id: req.params.id });
+        await post.delete();
+        res.sendStatus(200);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
     }
 });
 

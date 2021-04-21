@@ -2,8 +2,10 @@
 <div>
   <section class="page-gallery">
     <div class="image" v-for="post in posts" v-bind:key="post._id">     
-      <!--Delete Post
-      <div class="icon"><i class="fa fa-times" @click="deletePost(post)" aria-hidden="true"></i></div>-->
+      <!--Delete Post-->
+      <div class="icon">
+        <i class="fa fa-times" @click="deletePost(post._id)" aria-hidden="true"></i>
+      </div>
 
       <router-link :to="{ name: 'post', params: { id: post._id}}"><img :src="post.path" /></router-link>
       <div class="postInfo">
@@ -177,15 +179,14 @@ export default {
         //console.log(error);
       }
     },
-    /*async deletePost(post) {
+    async deletePost(postId) {
       try {
-        await axios.delete("/api/posts/" + post._id);
+        await axios.delete(`/api/posts/${postId}`);
         this.getPosts();
-        return true;
       } catch (error) {
          console.log(error);
       }
-    },*/
+    },
   }
 }
 </script>
