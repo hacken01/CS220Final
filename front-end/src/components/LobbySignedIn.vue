@@ -1,7 +1,7 @@
 <template>
 <div class="main">
   <div class="home">
-    <h3>Signed in as: {{user.firstName}} {{user.lastName}} <a @click="logout"><i class="fas fa-sign-out-alt"></i></a></h3>
+       <h3>Signed in as: {{user.firstName}} {{user.lastName}} <a @click="logout"><i class="fas fa-sign-out-alt"></i></a></h3>
   </div>
   <image-gallery :posts="posts" />
   <p v-if="error">{{error}}</p>
@@ -20,6 +20,7 @@ export default {
     return {
       posts: [],
       error: '',
+      searchText: '',
     }
   },
   created() {
@@ -28,7 +29,7 @@ export default {
   computed: {
     user() {
       return this.$root.$data.user;
-    },
+    }
   },
   methods: {
     async logout() {

@@ -35,5 +35,4 @@ export default {
 .home {
   padding-top: 20px;
 }
-
 </style>

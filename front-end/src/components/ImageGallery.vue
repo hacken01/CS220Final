@@ -1,6 +1,8 @@
 <template>
 <div>
   <section class="image-gallery">
+    
+
     <div class="image" v-for="post in posts" v-bind:key="post._id">
       <router-link :to="{ name: 'post', params: { id: post._id}}"><img :src="post.path" /></router-link>
       <div class="postInfo">
@@ -180,6 +182,7 @@ export default {
 </script>
 
 <style scoped>
+
 .postInfo {
   display: inline-block;
   justify-content: space-between;
@@ -214,6 +217,7 @@ p {
   background-color: rgb(231, 230, 230);
   padding: 5px;
   border-radius: 3px;
+  margin-top: 5px;
 }
 
 .commentList::-webkit-scrollbar {

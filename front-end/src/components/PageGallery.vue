@@ -208,6 +208,7 @@ p {
   background-color: rgb(231, 230, 230);
   padding: 5px;
   border-radius: 3px;
+  margin-top: 5px;
 }
 
 .commentList::-webkit-scrollbar {

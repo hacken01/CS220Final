@@ -85,6 +85,7 @@ export default {
         if(this.$route.params.id != null){
         let response = await axios.get("/api/posts/"+this.$route.params.id);
         this.post = response.data;
+        this.getComments();
         }
         console.log(this.post);
       } catch (error) {
