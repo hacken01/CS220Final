@@ -50,12 +50,10 @@ router.get('/:id', validUser, async (req, res) => {
     let comments = [];
     //LOOK up post
     let post = await Post.findOne({ _id: req.params.id });
-
     if (!post) {
         console.log("Post not found");
         return res.sendStatus(500);
     }
-
     try {
         comments = await Comment.find({
             //user: req.user //DO I NEED TO CHANGE THIS IS PHOTO?
@@ -63,9 +61,6 @@ router.get('/:id', validUser, async (req, res) => {
         }).sort({
             created: -1
         }).populate('user');
-
-        console.log("we got the back end comments");
-        console.log(comments);
         return res.send(comments);
     } catch (error) {
         console.log(error);
@@ -75,8 +70,6 @@ router.get('/:id', validUser, async (req, res) => {
 
 // create a comment
 router.post('/:id', validUser, async (req, res) => {
-    //LOOK up photo
-    console.log("created Comment Called");
     let post = await Post.findOne({ _id: req.params.id }); //Do I need to populate by photo?
 
     if (!post) {
@@ -89,7 +82,6 @@ router.post('/:id', validUser, async (req, res) => {
         post: post,
     });
     try {
-
         console.log(comment);
         await comment.save();
         return res.send(comment);
@@ -100,27 +92,35 @@ router.post('/:id', validUser, async (req, res) => {
 });
 
 // edit a comment -- only edits status and response
-router.put('/:id', validUser, async (req, res) => {
-    // can only do this if an administrator
-    if (req.user.role !== "admin") {
-        return res.sendStatus(403);
-    }
-    if (!req.body.status || !req.body.response) {
-        return res.status(400).send({
-            message: "status and response are required"
-        });
-    }
+router.put('/:postID/comments/:commentID', validUser, async (req, res) => {
+
     try {
-        comment = await comment.findOne({
-            _id: req.params.id
-        });
+        let comment = await Comment.findOne({ _id: req.params.commentID, post: req.params.postID });
+        if (!comment) {
+            res.sendStatus(404);
+            return;
+        }
+        comment.comment = req.body.comment;
         await comment.save();
-        return res.send({
-            comment: comment
-        });
+        res.send(comment);
     } catch (error) {
         console.log(error);
         return res.sendStatus(500);
+    }
+});
+//delete the Comment from the database
+router.delete('/:postID/comments/:commentID', async (req, res) => {
+    try {
+        let comment = await Comment.findOne({ _id: req.params.commentID, post: req.params.postID });
+        if (!comment) {
+            res.sendStatus(404);
+            return;
+        }
+        await comment.delete();
+        res.sendStatus(200);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
     }
 });
 

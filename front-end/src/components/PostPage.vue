@@ -68,6 +68,7 @@ export default {
     }
   },
   created() {
+    this.getPosts();
     this.getPost();
     this.getComments();
   },

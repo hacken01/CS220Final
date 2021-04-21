@@ -29,8 +29,8 @@
         <div class="commentList">
           <div class="comment" v-for="comment in comments[post._id] " :key="comment.id">
             <p>{{comment.comment}} -- Posted {{formatDate(comment.created)}} by {{post.user.username}}</p>
-            <button @click="deleteComment(post)" type="submit" value="R"><i class="fa fa-trash" aria-hidden="true"></i></button>
-            <button @click="editComment(post)" type="submit" value="E"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>
+            <button @click="deleteComment(post._id,comment._id)" type="submit" value="R"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            <button @click="editComment(post._id,comment._id)" type="submit" value="E"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>
           </div>
         </div>
       </div>
@@ -149,21 +149,25 @@ export default {
         //console.log(error);
       }
     },
-    async editComment(post){
-        //console.log("comment Edited ");
+    async editComment(postId,commentId){
+  
       try {
-        axios.put(`/api/comments/` + post._id, {
+
+        if(commentId){
+          axios.put(`/api/comments/${postId}/comments/${commentId}` , {
           comment: this.comment,
         });
         this.getComments();
+        }
+        this.comment = '';
       } catch (error) {
         //console.log(error);
       }
     },
-    async deleteComment(post) {
-        //console.log("comment Deleted");
+    async deleteComment(postId, commentId) {
+        console.log("comment Deleted");
       try {
-        await axios.delete(`/api/comments/` + post._id,);
+        await axios.delete(`/api/comments/${postId}/comments/${commentId}`);
         this.getComments();
       } catch (error) {
         //console.log(error);
