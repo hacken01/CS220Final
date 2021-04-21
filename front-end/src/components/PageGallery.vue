@@ -1,7 +1,10 @@
 <template>
 <div>
   <section class="page-gallery">
-    <div class="image" v-for="post in posts" v-bind:key="post._id">
+    <div class="image" v-for="post in posts" v-bind:key="post._id">     
+      <!--Delete Post
+      <div class="icon"><i class="fa fa-times" @click="deletePost(post)" aria-hidden="true"></i></div>-->
+
       <router-link :to="{ name: 'post', params: { id: post._id}}"><img :src="post.path" /></router-link>
       <div class="postInfo">
         <p class="postTitle">{{post.title}}</p>
@@ -28,11 +31,12 @@
         
         <div class="commentList">
           <div class="comment" v-for="comment in comments[post._id] " :key="comment.id">
-            <p>{{comment.comment}} -- Posted {{formatDate(comment.created)}} by {{post.user.username}}</p>
+            <p>{{comment.comment}} -- Posted {{formatDate(comment.created)}} by {{comment.user.username}}</p>
             <button @click="deleteComment(post._id,comment._id)" type="submit" value="R"><i class="fa fa-trash" aria-hidden="true"></i></button>
             <button @click="editComment(post._id,comment._id)" type="submit" value="E"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>
           </div>
         </div>
+        
       </div>
   
     </div>
@@ -173,6 +177,15 @@ export default {
         //console.log(error);
       }
     },
+    /*async deletePost(post) {
+      try {
+        await axios.delete("/api/posts/" + post._id);
+        this.getPosts();
+        return true;
+      } catch (error) {
+         console.log(error);
+      }
+    },*/
   }
 }
 </script>
@@ -249,6 +262,19 @@ button {
   padding-right: 30px;
 }
 
+.deletePost {
+  margin-top: 5px;
+  position:fixed;
+  top:0;
+  right:0;
+}
+
+.deletePost:hover {
+  margin-top: 5px;
+  border: 2px solid #42b983;
+  border-radius: 5px;
+}
+
 /* Masonry */
 *,
 *:before,
@@ -270,6 +296,7 @@ button {
   border-radius: 5px;
   background-color: white;
   padding: 5px;
+  padding-top: 5px;
   border: 5px solid white;
 
 }
@@ -282,6 +309,19 @@ button {
 .image:hover{
   border: 5px solid #42b983;
   border-radius: 5px;
+}
+
+.icon {
+    position: relative;
+    text-align: left;
+    color: #3c3c42;
+    padding-left: 0px;
+    padding-top: 3px;
+    width: 20px
+}
+
+.icon:hover {
+    color: #42b983;
 }
 
 /* Masonry on large screens */

@@ -69,6 +69,7 @@ export default {
         this.title = "";
         this.description = "";
         this.$emit('uploadFinished');
+        this.$emit('getPosts');
       } catch (error) {
         this.error = "Error: " + error.response.data.message;
       }
