@@ -16,6 +16,7 @@
 import axios from 'axios';
 import Uploader from '@/components/Uploader.vue';
 import PageGallery from '@/components/PageGallery.vue';
+//import Vue from 'vue';
 export default {
   name: 'MyPosts',
   components: {
@@ -49,6 +50,7 @@ export default {
     async getPosts() {
       try {
         this.response = await axios.get("/api/posts");
+        //Vue.set(this.posts, this.response.data);
         this.posts = this.response.data;
       } catch (error) {
         this.error = error.response.data.message;
@@ -56,6 +58,7 @@ export default {
     },
     close() {
       this.show = false;
+      this.getPosts();
     },
     toggleUpload() {
       this.show = true;

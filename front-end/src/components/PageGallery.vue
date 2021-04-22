@@ -75,12 +75,7 @@ export default {
   },
   computed: {
     user() {
-        if(this.$root.$data.user != null){
-            return this.$root.$data.user;
-        }
-        else{
-            return this.$root.$data.user;
-        }
+      return this.$root.$data.user;
     }
   },
   created() {
@@ -91,6 +86,7 @@ export default {
     async getPosts() {
       try {
         let response = await axios.get("/api/posts");
+        //Vue.set(this.posts, response.data);
         this.posts = response.data;
         this.getComments();
       } catch (error) {
@@ -128,7 +124,7 @@ export default {
           const response = await axios.get(`/api/comments/` + post._id);
           // use vue.set to make it reactive 
           Vue.set(this.comments,post._id,response.data); 
-          console.log(response.data);
+          //console.log(response.data);
         }
       } catch (error) {
         //console.log(error);
@@ -331,7 +327,6 @@ button {
 @media only screen and (min-width: 1025px) {
   .page-gallery {
     column-count: 4;
-    display: flex;
     justify-content: center;
   }
 }
@@ -340,7 +335,6 @@ button {
 @media only screen and (max-width: 1023px) and (min-width: 768px) {
   .page-gallery {
     column-count: 3;
-    display: flex;
     justify-content: center;
   }
 }
@@ -349,7 +343,6 @@ button {
 @media only screen and (max-width: 767px) and (min-width: 540px) {
   .page-gallery {
     column-count: 2;
-    display: flex;
     justify-content: center;
   }
 }

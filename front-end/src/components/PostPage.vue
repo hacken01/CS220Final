@@ -56,15 +56,8 @@ export default {
     }
   },
   computed: {
-    user() {
-        if(this.$root.$data.user != null){
-            return this.$root.$data.user;
-        }
-        else{
-
-            return this.$root.$data.user;
-        }
-      
+    user() {    
+        return this.$root.$data.user;
     }
   },
   created() {

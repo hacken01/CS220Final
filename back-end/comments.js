@@ -82,7 +82,7 @@ router.post('/:id', validUser, async (req, res) => {
         post: post,
     });
     try {
-        console.log(comment);
+        //console.log(comment);
         await comment.save();
         return res.send(comment);
     } catch (error) {
