@@ -283,6 +283,8 @@ button {
 @media only screen and (min-width: 1024px) {
   .image-gallery {
     column-count: 4;
+    display: flex;
+    justify-content: center;
   }
 }
 
@@ -290,6 +292,8 @@ button {
 @media only screen and (max-width: 1023px) and (min-width: 768px) {
   .image-gallery {
     column-count: 3;
+    display: flex;
+    justify-content: center;
   }
 }
 
@@ -297,6 +301,8 @@ button {
 @media only screen and (max-width: 767px) and (min-width: 540px) {
   .image-gallery {
     column-count: 2;
+    display: flex;
+    justify-content: center;
   }
 }
 </style>

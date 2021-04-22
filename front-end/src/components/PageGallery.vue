@@ -35,7 +35,9 @@
           <div class="comment" v-for="comment in comments[post._id] " :key="comment.id">
             <p>{{comment.comment}} -- Posted {{formatDate(comment.created)}} by {{comment.user.username}}</p>
             <button @click="deleteComment(post._id,comment._id)" type="submit" value="R"><i class="fa fa-trash" aria-hidden="true"></i></button>
-            <button @click="editComment(post._id,comment._id)" type="submit" value="E"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>
+            <div v-if="post.user.username === comment.user.username">
+              <button  @click="editComment(post._id,comment._id)" type="submit" value="E"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>
+            </div>
           </div>
         </div>
         
@@ -329,6 +331,8 @@ button {
 @media only screen and (min-width: 1025px) {
   .page-gallery {
     column-count: 4;
+    display: flex;
+    justify-content: center;
   }
 }
 
@@ -336,6 +340,8 @@ button {
 @media only screen and (max-width: 1023px) and (min-width: 768px) {
   .page-gallery {
     column-count: 3;
+    display: flex;
+    justify-content: center;
   }
 }
 
@@ -343,6 +349,8 @@ button {
 @media only screen and (max-width: 767px) and (min-width: 540px) {
   .page-gallery {
     column-count: 2;
+    display: flex;
+    justify-content: center;
   }
 }
 </style>
